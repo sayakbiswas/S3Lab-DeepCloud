@@ -9,7 +9,7 @@ var Home = React.createClass({
       <div style={styles.transparentBg} className="jumbotron col-sm-12 text-center">
         <h1>Deep Cloud</h1>
         <p className="lead">Image Classification</p>
-        <Link to="/results">
+        <Link to="/uploadData">
             <button className="btn btn-lg btn-success">Go</button>
         </Link>
       </div>

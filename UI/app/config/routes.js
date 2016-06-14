@@ -6,13 +6,16 @@ var IndexRoute = ReactRouter.IndexRoute;
 var Main = require('../components/Main');
 var Home = require('../components/Home');
 var hashHistory = ReactRouter.hashHistory;
-var PromptContainer = require('../containers/PromptContainer');
-var ConfirmBattleContainer = require('../containers/ConfirmBattleContainer');
+var ResultsContainer = require('../containers/ResultsContainer');
+var ContactContainer=require('../containers/ContactContainer');
+var UploadDataScreenContainer = require('../containers/UploadDataScreenContainer');
 
 var routes = (
   <Router history={hashHistory}>
     <Route path='/' component={Main}>
       <IndexRoute component={Home} />
+      <Route path='Contact' component={ContactContainer} />
+      <Route path='uploadData' component={UploadDataScreenContainer} />
       <Route path='results' header='Results' component={ResultsContainer} />
     </Route>
   </Router>
