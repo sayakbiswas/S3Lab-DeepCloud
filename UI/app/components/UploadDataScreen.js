@@ -45,10 +45,23 @@ function UploadDataScreen(props) {
               value={props.learningRate}
               onChange={props.onUpdateLearningRate} />
           </div>
-          <div className="form-group">
-            <label className="btn btn-default btn-file">
-              Choose Files <input type="file" name="upload" multiple="multiple" style={styles.invisible} />
+          <div className="form-group input-group">
+            <label className="input-group-btn">
+				<span className="btn btn-primary">
+					Choose Files
+				  	<input
+						type="file"
+						name="upload"
+						multiple="multiple"
+						style={styles.invisible}
+						onChange={props.onUpdateFile} />
+				</span>
             </label>
+			<input
+				type="text"
+				className="form-control"
+				readOnly
+				value={props.fileName} />
           </div>
           <div className="form-group col-sm-4 col-sm-offset-4">
               <button
@@ -72,7 +85,9 @@ UploadDataScreen.propTypes = {
   classNum: PropTypes.number.isRequired,
   onUpdateClassNum: PropTypes.func.isRequired,
   learningRate: PropTypes.number.isRequired,
-  onUpdateLearningRate: PropTypes.func.isRequired
+  onUpdateLearningRate: PropTypes.func.isRequired,
+  onUpdateFile: PropTypes.func.isRequired,
+  fileName: PropTypes.string.isRequired
 };
 
 module.exports = UploadDataScreen;

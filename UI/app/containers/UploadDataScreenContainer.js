@@ -11,7 +11,9 @@ var UploadDataScreenContainer = React.createClass({
       imageWidth: 28,
       imageHeight: 28,
       classNum: 10,
-      learningRate: 0.01
+      learningRate: 0.01,
+	  file: '',
+	  fileName: ''
     };
   },
   handleUpdateImageWidth: function(e) {
@@ -34,11 +36,45 @@ var UploadDataScreenContainer = React.createClass({
       learningRate: e.target.value
     });
   },
+  handleUpdateFile: function(e) {
+	e.preventDefault();
+	var reader = new FileReader();
+	var file = e.target.files[0];
+	console.log('file', file);
+	reader.onloadend = () => {
+		this.setState({
+			file: file,
+			fileName: file.name
+		});
+	}
+	reader.readAsDataURL(file);
+  },
   handleSubmitData: function(e) {
     e.preventDefault();
-	var formData = {
+	var xhr = new XMLHttpRequest();
+	var onProgress = function(e) {
+		if(e.lengthComputable) {
+			var percentComplete = (e.loaded / e.total) * 100;
+			console.log('percentComplete', percentComplete);
+		}
+	};
+	var onReady = function(e) {
 
-	}
+	};
+	var onError = function(e) {
+
+	};
+	var formData = new FormData();
+	formData.append('width', this.state.imageWidth);
+	formData.append('height', this.state.imageHeight);
+	formData.append('nClass', this.state.classNum);
+	formData.append('alpha', this.state.learningRate);
+	formData.append('upload', this.state.file);
+	xhr.open('post', 'http://localhost:8888/uploadCompleteScript', true);
+	xhr.addEventListener('error', onError, false);
+	xhr.addEventListener('progress', onProgress, false);
+	xhr.send(formData);
+	xhr.addEventListener('readystatechange', onReady, false);
   },
   render: function() {
 	  return(
@@ -51,7 +87,9 @@ var UploadDataScreenContainer = React.createClass({
   	      	classNum={this.state.classNum}
   	      	onUpdateClassNum={this.handleUpdateClassNum}
   	      	learningRate={this.state.learningRate}
-  	      	onUpdateLearningRate={this.handleUpdateLearningRate} />  
+  	      	onUpdateLearningRate={this.handleUpdateLearningRate}
+			onUpdateFile={this.handleUpdateFile}
+			fileName={this.state.fileName} />
 	  );
   }
 });
