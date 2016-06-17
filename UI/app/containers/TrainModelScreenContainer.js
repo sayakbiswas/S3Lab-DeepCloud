@@ -1,8 +1,8 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
-var UploadDataScreen = require('../components/UploadDataScreen');
+var TrainModelScreen = require('../components/TrainModelScreen');
 
-var UploadDataScreenContainer = React.createClass({
+var TrainModelScreenContainer = React.createClass({
   contextTypes: {
     router: PropTypes.object.isRequired
   },
@@ -13,7 +13,8 @@ var UploadDataScreenContainer = React.createClass({
       classNum: 10,
       learningRate: 0.01,
 	  file: '',
-	  fileName: ''
+	  fileName: '',
+	  result: ''
     };
   },
   handleUpdateImageWidth: function(e) {
@@ -50,6 +51,10 @@ var UploadDataScreenContainer = React.createClass({
 	reader.readAsDataURL(file);
   },
   handleSubmitData: function(e) {
+	var self = this;
+	this.setState({
+		result: 'Uploading and training ...'
+	});
     e.preventDefault();
 	var xhr = new XMLHttpRequest();
 	var onProgress = function(e) {
@@ -59,7 +64,10 @@ var UploadDataScreenContainer = React.createClass({
 		}
 	};
 	var onReady = function(e) {
-
+		if(xhr.readyState == 4 && xhr.status == 200) {
+			var response = JSON.parse(xhr.responseText);
+			self.handleServiceResponse(response);
+		}
 	};
 	var onError = function(e) {
 
@@ -70,15 +78,20 @@ var UploadDataScreenContainer = React.createClass({
 	formData.append('nClass', this.state.classNum);
 	formData.append('alpha', this.state.learningRate);
 	formData.append('upload', this.state.file);
-	xhr.open('post', 'http://localhost:8888/uploadCompleteScript', true);
+	xhr.open('post', 'https://arcane-shore-81829.herokuapp.com/uploadCompleteScript', true);
 	xhr.addEventListener('error', onError, false);
 	xhr.addEventListener('progress', onProgress, false);
 	xhr.send(formData);
 	xhr.addEventListener('readystatechange', onReady, false);
   },
+  handleServiceResponse: function(responseObject) {
+	this.setState({
+		result: 'Model successfully trained with accuracy: ' + responseObject.Accuracy
+	});
+  },
   render: function() {
 	  return(
-		  <UploadDataScreen
+		  <TrainModelScreen
   	      	onSubmitData={this.handleSubmitData}
   	      	imageWidth={this.state.imageWidth}
   	      	onUpdateImageWidth={this.handleUpdateImageWidth}
@@ -89,9 +102,10 @@ var UploadDataScreenContainer = React.createClass({
   	      	learningRate={this.state.learningRate}
   	      	onUpdateLearningRate={this.handleUpdateLearningRate}
 			onUpdateFile={this.handleUpdateFile}
-			fileName={this.state.fileName} />
+			fileName={this.state.fileName}
+			result={this.state.result} />
 	  );
   }
 });
 
-module.exports = UploadDataScreenContainer;
+module.exports = TrainModelScreenContainer;

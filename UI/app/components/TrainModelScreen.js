@@ -2,10 +2,10 @@ var React = require('react');
 var styles = require('../styles/styles');
 var PropTypes = React.PropTypes;
 
-function UploadDataScreen(props) {
+function TrainModelScreen(props) {
   return(
     <div className="jumbotron col-sm-6 col-sm-offset-3 text-center" style={styles.transparentBg}>
-      <h2>Upload Data</h2>
+      <h2>Upload Data for Training</h2>
       <div className="col-sm-12">
         <form onSubmit={props.onSubmitData} encType="multipart/form-data">
           <div className="form-group">
@@ -67,16 +67,19 @@ function UploadDataScreen(props) {
               <button
                   className="btn btn-block btn-success"
                   type="submit">
-                  Upload File
+                  Train
               </button>
           </div>
         </form>
+		<div className="col-sm-12 results-section">
+		  {props.result}
+		</div>
       </div>
     </div>
   );
 }
 
-UploadDataScreen.propTypes = {
+TrainModelScreen.propTypes = {
   onSubmitData: PropTypes.func.isRequired,
   imageWidth: PropTypes.number.isRequired,
   onUpdateImageWidth: PropTypes.func.isRequired,
@@ -87,7 +90,8 @@ UploadDataScreen.propTypes = {
   learningRate: PropTypes.number.isRequired,
   onUpdateLearningRate: PropTypes.func.isRequired,
   onUpdateFile: PropTypes.func.isRequired,
-  fileName: PropTypes.string.isRequired
+  fileName: PropTypes.string.isRequired,
+  result: PropTypes.string.isRequired
 };
 
-module.exports = UploadDataScreen;
+module.exports = TrainModelScreen;

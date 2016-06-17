@@ -8,14 +8,16 @@ var Home = require('../components/Home');
 var hashHistory = ReactRouter.hashHistory;
 var ResultsContainer = require('../containers/ResultsContainer');
 var ContactContainer=require('../containers/ContactContainer');
-var UploadDataScreenContainer = require('../containers/UploadDataScreenContainer');
+var TrainModelScreenContainer = require('../containers/TrainModelScreenContainer');
+var PredictScreenContainer = require('../containers/PredictScreenContainer');
 
 var routes = (
   <Router history={hashHistory}>
     <Route path='/' component={Main}>
       <IndexRoute component={Home} />
       <Route path='Contact' component={ContactContainer} />
-      <Route path='uploadData' component={UploadDataScreenContainer} />
+      <Route path='trainModel' component={TrainModelScreenContainer} />
+	  <Route path='predict' component={PredictScreenContainer} />
       <Route path='results' header='Results' component={ResultsContainer} />
     </Route>
   </Router>
