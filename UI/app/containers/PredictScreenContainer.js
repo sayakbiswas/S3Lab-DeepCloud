@@ -19,13 +19,13 @@ var PredictScreenContainer = React.createClass({
 		var reader = new FileReader();
 		var file = e.target.files[0];
 		console.log('file', file);
-		reader.onloadend = () => {
+		reader.onloadend = function() {
 			this.setState({
 				file: file,
 				fileName: file.name,
 				imagePreviewUrl: reader.result
 			});
-		}
+		};
 		reader.readAsDataURL(file);
 	},
 	handleSubmitData: function(e) {
