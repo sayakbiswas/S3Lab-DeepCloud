@@ -7,6 +7,7 @@ var HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 
 module.exports = {
   entry: [
+	'webpack-dev-server/client?http://0.0.0.0:80',
     './app/index.js'
   ],
   output: {
