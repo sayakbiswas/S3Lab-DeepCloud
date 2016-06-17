@@ -41,9 +41,10 @@ var TrainModelScreenContainer = React.createClass({
 	e.preventDefault();
 	var reader = new FileReader();
 	var file = e.target.files[0];
+	var self = this;
 	console.log('file', file);
 	reader.onloadend = function() {
-		this.setState({
+		self.setState({
 			file: file,
 			fileName: file.name
 		});
