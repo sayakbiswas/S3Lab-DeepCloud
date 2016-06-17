@@ -53,7 +53,7 @@ var PredictScreenContainer = React.createClass({
 		};
 		var formData = new FormData();
 		formData.append('upload', this.state.file);
-		xhr.open('post', 'https://arcane-shore-81829.herokuapp.com/MNISTPredictor', true);
+		xhr.open('post', 'http://deepc02.acis.ufl.edu:8888/MNISTPredictor', true);
 		xhr.addEventListener('error', onError, false);
 		xhr.addEventListener('progress', onProgress, false);
 		xhr.send(formData);

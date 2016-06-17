@@ -79,7 +79,7 @@ var TrainModelScreenContainer = React.createClass({
 	formData.append('nClass', this.state.classNum);
 	formData.append('alpha', this.state.learningRate);
 	formData.append('upload', this.state.file);
-	xhr.open('post', 'https://arcane-shore-81829.herokuapp.com/uploadCompleteScript', true);
+	xhr.open('post', 'http://deepc02.acis.ufl.edu:8888/uploadCompleteScript', true);
 	xhr.addEventListener('error', onError, false);
 	xhr.addEventListener('progress', onProgress, false);
 	xhr.send(formData);
