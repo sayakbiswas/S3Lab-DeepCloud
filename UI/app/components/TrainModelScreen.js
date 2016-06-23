@@ -1,6 +1,7 @@
 var React = require('react');
 var styles = require('../styles/styles');
 var PropTypes = React.PropTypes;
+var DownloadButtonContainer = require('../containers/DownloadButtonContainer');
 
 function TrainModelScreen(props) {
   return(
@@ -72,7 +73,14 @@ function TrainModelScreen(props) {
           </div>
         </form>
 		<div className="col-sm-12 results-section">
-		  {props.result}
+			<div>
+				{props.result}
+			</div>
+			<div id="download-button">
+				<DownloadButtonContainer
+					modelDownloadLink={props.modelDownloadLink}
+					shouldDisplayButton={props.shouldDisplayButton} />
+			</div>
 		</div>
       </div>
     </div>
@@ -91,7 +99,9 @@ TrainModelScreen.propTypes = {
   onUpdateLearningRate: PropTypes.func.isRequired,
   onUpdateFile: PropTypes.func.isRequired,
   fileName: PropTypes.string.isRequired,
-  result: PropTypes.string.isRequired
+  result: PropTypes.string.isRequired,
+  modelDownloadLink: PropTypes.string.isRequired,
+  shouldDisplayButton: PropTypes.bool.isRequired
 };
 
 module.exports = TrainModelScreen;

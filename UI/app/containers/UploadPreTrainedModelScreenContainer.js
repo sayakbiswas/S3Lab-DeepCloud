@@ -1,8 +1,8 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
-var PredictScreen = require('../components/PredictScreen');
+var UploadPreTrainedModelScreen = require('../components/UploadPreTrainedModelScreen');
 
-var PredictScreenContainer = React.createClass({
+var UploadPreTrainedModelScreenContainer = React.createClass({
 	contextTypes: {
 		router: PropTypes.object.isRequired
 	},
@@ -10,8 +10,7 @@ var PredictScreenContainer = React.createClass({
 		return {
 			file: '',
 			fileName: '',
-			result: '',
-			imagePreviewUrl: ''
+			result: ''
 		};
 	},
 	handleUpdateFile: function(e) {
@@ -19,16 +18,10 @@ var PredictScreenContainer = React.createClass({
 		var reader = new FileReader();
 		var file = e.target.files[0];
 		var self = this;
-		var fileType = file.name.split('.').pop();
-		if(fileType != 'jpeg' && fileType != 'png' && fileType != 'jpg') {
-			alert('Please upload a PNG or JPEG file.');
-			return false;
-		}
 		reader.onloadend = function() {
 			self.setState({
 				file: file,
-				fileName: file.name,
-				imagePreviewUrl: reader.result
+				fileName: file.name
 			});
 		};
 		reader.readAsDataURL(file);
@@ -48,8 +41,7 @@ var PredictScreenContainer = React.createClass({
 		};
 		var onReady = function(e) {
 			if(xhr.readyState == 4 && xhr.status == 200) {
-				var response = JSON.parse(xhr.responseText);
-				self.handleServiceResponse(response);
+				self.handleServiceResponse(xhr.responseText);
 			}
 		};
 		var onError = function(e) {
@@ -57,7 +49,7 @@ var PredictScreenContainer = React.createClass({
 		};
 		var formData = new FormData();
 		formData.append('upload', this.state.file);
-		xhr.open('post', 'http://localhost:8888/MNISTPredictor', true);
+		xhr.open('post', 'http://localhost:8888/generalPredictorModelUpload', true);
 		xhr.addEventListener('error', onError, false);
 		xhr.addEventListener('progress', onProgress, false);
 		xhr.send(formData);
@@ -65,24 +57,23 @@ var PredictScreenContainer = React.createClass({
 	},
 	handleServiceResponse: function(responseObject) {
 		this.setState({
-			result: 'The number in the image is: ' + responseObject.Prediction
+			result: 'The pre trained model ' + this.state.fileName + ' has been uploaded. You can now use it for prediction.'
 		});
 	},
 	handleErrorResponse: function() {
 		this.setState({
-			result: 'The prediction service failed!'
+			result: 'The model could not be uploaded successfully'
 		});
 	},
 	render: function() {
 		return(
-			<PredictScreen
+			<UploadPreTrainedModelScreen
 				onSubmitData={this.handleSubmitData}
 				onUpdateFile={this.handleUpdateFile}
 				fileName={this.state.fileName}
-				result={this.state.result}
-				imagePreviewUrl={this.state.imagePreviewUrl} />
+				result={this.state.result} />
 		);
 	}
 });
 
-module.exports = PredictScreenContainer;
+module.exports = UploadPreTrainedModelScreenContainer;

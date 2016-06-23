@@ -14,7 +14,9 @@ var TrainModelScreenContainer = React.createClass({
       learningRate: 0.01,
 	  file: '',
 	  fileName: '',
-	  result: ''
+	  result: '',
+	  shouldDisplayButton: false,
+	  modelDownloadLink: ''
     };
   },
   handleUpdateImageWidth: function(e) {
@@ -42,7 +44,6 @@ var TrainModelScreenContainer = React.createClass({
 	var reader = new FileReader();
 	var file = e.target.files[0];
 	var self = this;
-	console.log('file', file);
 	reader.onloadend = function() {
 		self.setState({
 			file: file,
@@ -71,7 +72,7 @@ var TrainModelScreenContainer = React.createClass({
 		}
 	};
 	var onError = function(e) {
-
+		self.handleErrorResponse();
 	};
 	var formData = new FormData();
 	formData.append('width', this.state.imageWidth);
@@ -79,7 +80,7 @@ var TrainModelScreenContainer = React.createClass({
 	formData.append('nClass', this.state.classNum);
 	formData.append('alpha', this.state.learningRate);
 	formData.append('upload', this.state.file);
-	xhr.open('post', 'http://deepc02.acis.ufl.edu:8888/uploadCompleteScript', true);
+	xhr.open('post', 'http://localhost:8888/uploadCompleteScript', true);
 	xhr.addEventListener('error', onError, false);
 	xhr.addEventListener('progress', onProgress, false);
 	xhr.send(formData);
@@ -87,7 +88,16 @@ var TrainModelScreenContainer = React.createClass({
   },
   handleServiceResponse: function(responseObject) {
 	this.setState({
-		result: 'Model successfully trained with accuracy: ' + responseObject.Accuracy
+		result: 'Model successfully trained with accuracy: ' + responseObject.Accuracy,
+		modelDownloadLink: responseObject.trainedModel,
+		shouldDisplayButton: true
+	});
+  },
+  handleErrorResponse: function() {
+	this.setState({
+		result: 'Model could not be trained successfully!',
+		modelDownloadLink: '',
+		shouldDisplayButton: false
 	});
   },
   render: function() {
@@ -104,7 +114,9 @@ var TrainModelScreenContainer = React.createClass({
   	      	onUpdateLearningRate={this.handleUpdateLearningRate}
 			onUpdateFile={this.handleUpdateFile}
 			fileName={this.state.fileName}
-			result={this.state.result} />
+			result={this.state.result}
+			modelDownloadLink={this.state.modelDownloadLink}
+			shouldDisplayButton={this.state.shouldDisplayButton} />
 	  );
   }
 });

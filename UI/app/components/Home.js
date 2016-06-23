@@ -10,14 +10,19 @@ var Home = React.createClass({
         <h1>Deep Cloud</h1>
         <p className="lead">MNIST Image Prediction</p>
 		<div className="btn-group btn-group-lg">
-			<div className="col-sm-6">
+			<div className="col-sm-4">
 				<Link to="/trainModel">
 		            <button className="btn btn-lg btn-success">Train Model</button>
 		        </Link>
 			</div>
-	        <div className="col-sm-6">
+	        <div className="col-sm-4">
 				<Link to="/predict">
 					<button className="btn btn-lg btn-success">Predict</button>
+				</Link>
+			</div>
+			<div className="col-sm-4">
+				<Link to="/uploadPreTrainedModel">
+					<button className="btn btn-lg btn-success">Pre-Trained Model</button>
 				</Link>
 			</div>
 		</div>

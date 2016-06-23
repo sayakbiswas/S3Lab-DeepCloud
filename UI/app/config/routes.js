@@ -10,6 +10,7 @@ var ResultsContainer = require('../containers/ResultsContainer');
 var ContactContainer=require('../containers/ContactContainer');
 var TrainModelScreenContainer = require('../containers/TrainModelScreenContainer');
 var PredictScreenContainer = require('../containers/PredictScreenContainer');
+var UploadPreTrainedModelScreenContainer = require('../containers/UploadPreTrainedModelScreenContainer');
 
 var routes = (
   <Router history={hashHistory}>
@@ -18,6 +19,7 @@ var routes = (
       <Route path='Contact' component={ContactContainer} />
       <Route path='trainModel' component={TrainModelScreenContainer} />
 	  <Route path='predict' component={PredictScreenContainer} />
+	  <Route path='uploadPreTrainedModel' component={UploadPreTrainedModelScreenContainer} />
       <Route path='results' header='Results' component={ResultsContainer} />
     </Route>
   </Router>
