@@ -2,10 +2,39 @@ var React = require('react');
 var styles = require('../styles/styles');
 var PropTypes = React.PropTypes;
 var ReactRouter = require('react-router');
+var Router = ReactRouter.Router;
 var Link = ReactRouter.Link;
+var firebaseUtils = require('../utils/firebaseUtils');
 
-function NavBar(props) {
-  return(
+var NavBar=React.createClass( {
+ getInitialState: function(){
+    return {
+      loggedIn: firebaseUtils.isLoggedIn()
+    }
+  },
+  handleLogout: function(loggedIn){
+    this.setState({
+      loggedIn: loggedIn
+    });
+  },
+  componentWillMount: function(){
+    firebaseUtils.onChange = this.handleLogout;
+  },
+  processLogout:function(){
+	firebaseUtils.logout();  
+  },
+  
+ render:function() {
+	var loginOrOut;
+    var register;
+    if(this.state.loggedIn){
+      loginOrOut = <li><Link to="/"className="active" onClick={this.processLogout}>Logout</Link></li>;
+      register = null
+    } else {
+      loginOrOut = <li><Link to="/login" className="active">Login</Link></li>;
+      register = <li><Link to="/register" className="active"> Register </Link></li>;
+    }
+	return(
     <div className="navbar navbar-default navbar-static-top">
       <div className="container">
         <div className="navbar-header">
@@ -19,17 +48,17 @@ function NavBar(props) {
         </div>
         <div className="collapse navbar-collapse" id="navbar-ex-collapse">
           <ul className="nav navbar-nav navbar-right">
-            <li className="active">
-              <a href="#">Login</a>
-            </li>
+		  <li><Link to="/dashboard" className="active"> Dashboard </Link></li>
+		  {loginOrOut}
+		  {register}
             <li>
-              <Link to='/Contact'>Contacts</Link>
+              <Link to='/Contact'>Contact Us</Link>
             </li>
           </ul>
         </div>
       </div>
     </div>
-  );
-}
+  )
+}});
 
 module.exports = NavBar;

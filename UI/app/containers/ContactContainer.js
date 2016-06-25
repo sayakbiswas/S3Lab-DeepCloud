@@ -1,5 +1,5 @@
 var React = require('react');
-
+var Firebase = require('firebase');
 
 var ContactContainer = React.createClass({
   contextTypes: {
@@ -9,16 +9,25 @@ var ContactContainer = React.createClass({
     return {
       fullname: '',
 	  email:'',
-	  message:'Enter your message'
+	  message:'Enter your message',
+	  tel:''
     }
   },
-  onSubmitName:function(e){
+  onSubmitForm:function(e){
 	e.preventDefault();
-	var fullname=this.state.fullname;
+	var contactUs={
+		fullname:this.state.fullname,
+		email:this.state.email,
+		message:this.state.message,
+		tel:this.state.tel
+	}
+	var contactUsRef=new Firebase('https://deepcloud.firebaseio.com/contactUs');
+	contactUsRef.push(contactUs);
 	this.setState({
 		fullname:'',
 		email:'',
-		message:'Enter your message'
+		message:'Enter your message',
+		tel:''
 	});
   },
   onUpdateName:function(e){
@@ -37,6 +46,11 @@ var ContactContainer = React.createClass({
 		message:e.target.value
 	});
   },
+   onUpdateTel:function(e){
+	this.setState({
+		tel:e.target.value
+	});
+  },
   render: function () {
     return (
 	<div className="section text-left">
@@ -48,7 +62,7 @@ var ContactContainer = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-12">
-            <form role="form" onSubmit={this.onSubmitName}>
+            <form role="form" onSubmit={this.onSubmitForm}>
               <div className="form-group">
                 <label className="control-label" htmlFor="fullName1">Full Name</label>
                 <input className="form-control" id="fullName" placeholder="Enter Full Name"
@@ -62,7 +76,7 @@ var ContactContainer = React.createClass({
               <div className="form-group">
                 <label className="control-label" htmlFor="telephoneNo">Mobile Number</label>
                 <input className="form-control" id="telephoneNo" placeholder="Mobile Number"
-                type="tel"/>
+                type="tel" value={this.state.tel} onChange={this.onUpdateTel}/>
               </div>
               <div className="form-group">
                 <label className="control-label" htmlFor="message">Message</label>
