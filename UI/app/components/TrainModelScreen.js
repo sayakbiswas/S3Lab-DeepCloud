@@ -2,6 +2,7 @@ var React = require('react');
 var styles = require('../styles/styles');
 var PropTypes = React.PropTypes;
 var DownloadButtonContainer = require('../containers/DownloadButtonContainer');
+var TrainingAccuracyChartContainer = require('../containers/TrainingAccuracyChartContainer');
 
 function TrainModelScreen(props) {
   return(
@@ -81,6 +82,12 @@ function TrainModelScreen(props) {
 					modelDownloadLink={props.modelDownloadLink}
 					shouldDisplayButton={props.shouldDisplayButton} />
 			</div>
+			<div id="result-charts">
+				<TrainingAccuracyChartContainer
+					shouldRenderChart={props.shouldRenderChart}
+					container={props.container}
+					options={props.options} />
+			</div>
 		</div>
       </div>
     </div>
@@ -101,7 +108,10 @@ TrainModelScreen.propTypes = {
   fileName: PropTypes.string.isRequired,
   result: PropTypes.string.isRequired,
   modelDownloadLink: PropTypes.string.isRequired,
-  shouldDisplayButton: PropTypes.bool.isRequired
+  shouldDisplayButton: PropTypes.bool.isRequired,
+  shouldRenderChart: PropTypes.bool.isRequired,
+  container: PropTypes.string.isRequired,
+  options: PropTypes.object.isRequired
 };
 
 module.exports = TrainModelScreen;

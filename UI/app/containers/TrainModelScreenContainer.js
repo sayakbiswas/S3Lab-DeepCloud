@@ -16,7 +16,10 @@ var TrainModelScreenContainer = React.createClass({
 	  fileName: '',
 	  result: '',
 	  shouldDisplayButton: false,
-	  modelDownloadLink: ''
+	  modelDownloadLink: '',
+	  shouldRenderChart: false,
+	  container: 'accuracy-epoch-chart',
+	  options: {}
     };
   },
   handleUpdateImageWidth: function(e) {
@@ -80,24 +83,68 @@ var TrainModelScreenContainer = React.createClass({
 	formData.append('nClass', this.state.classNum);
 	formData.append('alpha', this.state.learningRate);
 	formData.append('upload', this.state.file);
-	xhr.open('post', 'http://deepc02.acis.ufl.edu:8888/uploadCompleteScript', true);
+	xhr.open('post', 'http://localhost:8888/uploadCompleteScript', true);
 	xhr.addEventListener('error', onError, false);
 	xhr.addEventListener('progress', onProgress, false);
 	xhr.send(formData);
 	xhr.addEventListener('readystatechange', onReady, false);
   },
   handleServiceResponse: function(responseObject) {
+	var accuracyList = JSON.parse(responseObject.Accuracy);
+	var epochValues = [];
+	var dataValues = [];
+	for(var i = 0; i < accuracyList.length; i++) {
+		epochValues[i] = parseInt(accuracyList[i].Epoch);
+		dataValues[i] = parseFloat(accuracyList[i].Accuracy) * 100;
+	}
+	var optionValues = {
+		title: {
+			text: 'Accuracy vs. Epoch'
+		},
+		xAxis: {
+			title: {
+				text: 'Epoch'
+			},
+			categories: epochValues
+		},
+		yAxis: {
+			title: {
+				text: 'Accuracy (%)'
+			},
+			plotLines: [{
+				value: 0,
+				width: 1,
+				color: '#808080'
+			}]
+		},
+		legend: {
+			layout: 'vertical',
+			align: 'right',
+			verticalAlign: 'middle',
+			borderWidth: 0
+		},
+		series: [{
+			name: 'Accuracy',
+			data: dataValues
+		}]
+	};
 	this.setState({
-		result: 'Model successfully trained with accuracy: ' + responseObject.Accuracy,
+		result: 'Model successfully trained with accuracy: ' + (accuracyList[accuracyList.length - 1].Accuracy * 100).toFixed(2) + '%',
 		modelDownloadLink: responseObject.trainedModel,
-		shouldDisplayButton: true
+		shouldDisplayButton: true,
+		shouldRenderChart: true,
+		container: 'accuracy-epoch-chart',
+		options: optionValues
 	});
   },
   handleErrorResponse: function() {
 	this.setState({
 		result: 'Model could not be trained successfully!',
 		modelDownloadLink: '',
-		shouldDisplayButton: false
+		shouldDisplayButton: false,
+		shouldRenderChart: false,
+		container: 'accuracy-epoch-chart',
+		options: {}
 	});
   },
   render: function() {
@@ -116,7 +163,10 @@ var TrainModelScreenContainer = React.createClass({
 			fileName={this.state.fileName}
 			result={this.state.result}
 			modelDownloadLink={this.state.modelDownloadLink}
-			shouldDisplayButton={this.state.shouldDisplayButton} />
+			shouldDisplayButton={this.state.shouldDisplayButton}
+			shouldRenderChart={this.state.shouldRenderChart}
+			container={this.state.container}
+			options={this.state.options} />
 	  );
   }
 });

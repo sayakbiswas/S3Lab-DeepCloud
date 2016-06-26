@@ -4,14 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-	"start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
-	"prod": "NODE_ENV=production node server.js",
-	"postinstall": "webpack -p"
+    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "prod": "NODE_ENV=production node server.js",
+    "postinstall": "webpack -p"
   },
   "author": "Sayak Biswas",
   "license": "MIT",
   "dependencies": {
-	"firebase": "^2.3.2",
+    "firebase": "^2.3.2",
+    "highcharts": "^4.2.5",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.4.1"
@@ -23,6 +24,6 @@
     "html-webpack-plugin": "^2.19.0",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1",
-	"express": "latest"
+    "express": "latest"
   }
 }
