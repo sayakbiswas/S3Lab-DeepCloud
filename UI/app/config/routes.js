@@ -20,13 +20,13 @@ var routes = (
     <Route path='/' component={Main}>
       <IndexRoute component={Home} />
       <Route path='Contact' component={ContactContainer} />
-      <Route path='trainModel' component={TrainModelScreenContainer} onEnter={requireAuth}/>
-	  <Route path='predict' component={PredictScreenContainer}onEnter={requireAuth} />
-	  <Route path='uploadPreTrainedModel' component={UploadPreTrainedModelScreenContainer}onEnter={requireAuth} />
+      <Route path='trainModel' component={TrainModelScreenContainer}/>
+	  <Route path='predict' component={PredictScreenContainer} />
+	  <Route path='uploadPreTrainedModel' component={UploadPreTrainedModelScreenContainer}/>
 	  <Route path="login" component={Login} />
       <Route path="register" component={Register} />
-      <Route path='results' header='Results' component={ResultsContainer} onEnter={requireAuth} />
-	  <Route path="dashboard" component={Dashboard} onEnter={requireAuth} />
+      <Route path='results' header='Results' component={ResultsContainer}/>
+	  <Route path="dashboard" component={Dashboard} />
     </Route>
   </Router>
 );
