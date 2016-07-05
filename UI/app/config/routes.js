@@ -15,6 +15,8 @@ var Login=require('../components/Login');
 var Register=require('../components/Register');
 var Dashboard=require('../components/Dashboard');
 var requireAuth = require('../utils/authenticated');
+var JobDetailsContainer = require('../containers/JobDetailsContainer');
+
 var routes = (
   <Router history={hashHistory}>
     <Route path='/' component={Main}>
@@ -27,6 +29,7 @@ var routes = (
       <Route path="register" component={Register} />
       <Route path='results' header='Results' component={ResultsContainer}/>
 	  <Route path="dashboard" component={Dashboard} />
+	  <Route path='jobDetails/:jobId' component={JobDetailsContainer} />
     </Route>
   </Router>
 );

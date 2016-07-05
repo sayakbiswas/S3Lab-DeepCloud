@@ -4,6 +4,13 @@ var styles = {
     },
 	invisible: {
 		display: 'none'
+	},
+	containerStyle: {
+		marginTop: '2em'
+	},
+	jobDetailRowStyle: {
+		marginTop: '0.5em',
+		marginBottom: '0.5em',
 	}
 };
 

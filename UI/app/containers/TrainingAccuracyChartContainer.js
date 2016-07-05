@@ -17,7 +17,17 @@ var TrainingAccuracyChartContainer = React.createClass({
 		};
 	},
 	componentDidMount: function() {
-
+		if(this.props.shouldRenderChart === true) {
+			this.setState({
+				shouldRenderChart: this.props.shouldRenderChart,
+				container: this.props.container,
+				options: this.props.options
+			});
+			this.chart = new Highcharts[this.props.type || "Chart"](
+				this.props.container,
+				this.props.options
+			);
+		}
 	},
 	componentWillReceiveProps: function(nextProps) {
 		if(nextProps.shouldRenderChart === true) {
@@ -34,7 +44,9 @@ var TrainingAccuracyChartContainer = React.createClass({
 		}
 	},
 	componentWillUnmount: function() {
-		this.chart.destroy();
+		if(this.chart) {
+			this.chart.destroy();
+		}
 	},
 	render: function() {
 		console.log('rendering chart');
