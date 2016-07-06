@@ -16,7 +16,7 @@ function JobDetails(props) {
 				<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>{generalUtils.capitalizeFirstLetter(props.jobType)}</div>
 				<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Status: </div>
 				<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>{generalUtils.capitalizeFirstLetter(props.jobStatus)}</div>
-				{(() => {
+				{(function() {
 					if(props.jobType == 'training') {
 						return(
 							<div>
