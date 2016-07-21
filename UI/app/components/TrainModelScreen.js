@@ -86,7 +86,9 @@ function TrainModelScreen(props) {
 				<TrainingAccuracyChartContainer
 					shouldRenderChart={props.shouldRenderChart}
 					container={props.container}
-					options={props.options} />
+					options={props.options}
+					epochValues={props.epochValues}
+					dataValues={props.dataValues} />
 			</div>
 		</div>
       </div>
@@ -111,7 +113,9 @@ TrainModelScreen.propTypes = {
   shouldDisplayButton: PropTypes.bool.isRequired,
   shouldRenderChart: PropTypes.bool.isRequired,
   container: PropTypes.string.isRequired,
-  options: PropTypes.object.isRequired
+  options: PropTypes.object.isRequired,
+  epochValues: PropTypes.array.isRequired,
+  dataValues: PropTypes.array.isRequired
 };
 
 module.exports = TrainModelScreen;

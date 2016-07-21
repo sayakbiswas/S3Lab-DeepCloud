@@ -44,7 +44,7 @@ var JobsListComponentContainer = React.createClass({
 			}
 		}.bind(this);
 
-		xhr.open('get', 'http://deepc02.acis.ufl.edu:8888/getDashboard', true);
+		xhr.open('get', 'http://deepc05.acis.ufl.edu:8888/getDashboard', true);
 		xhr.addEventListener('error', onError, false);
 		xhr.addEventListener('progress', onProgress, false);
 		xhr.send();
