@@ -99,13 +99,13 @@ var TrainModelScreenContainer = React.createClass({
 		var unprocessedResponseLength = xhr.responseText.length;
 		var unprocessedResponse = xhr.responseText;
 		if(prevDataLength != unprocessedResponseLength) {
-			//console.log('unparsed continuous response :: ', unprocessedResponse);
+			console.log('unparsed continuous response :: ', unprocessedResponse);
 			prevDataLength = unprocessedResponseLength;
 			var response = unprocessedResponse.substring(nextReadPosition, unprocessedResponseLength);
-			//console.log('response :: ', response);
+			console.log('response :: ', response);
 			nextReadPosition = unprocessedResponseLength;
 			var processedResponse = JSON.parse(response);
-			//console.log('processedResponse :: ', processedResponse);
+			console.log('processedResponse :: ', processedResponse);
 			if(!isChartDrawn) {
 				self.handleServiceResponse(processedResponse);
 				isChartDrawn = true;

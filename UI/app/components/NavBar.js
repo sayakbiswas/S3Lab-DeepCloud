@@ -5,6 +5,10 @@ var ReactRouter = require('react-router');
 var Router = ReactRouter.Router;
 var Link = ReactRouter.Link;
 var firebaseUtils = require('../utils/firebaseUtils');
+import AppBar from 'material-ui/AppBar';
+import RaisedButton from 'material-ui/RaisedButton';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
 
 var NavBar=React.createClass( {
  getInitialState: function(){
@@ -14,28 +18,68 @@ var NavBar=React.createClass( {
   },
   handleLogout: function(loggedIn){
     this.setState({
-      loggedIn: loggedIn
+      loggedIn: loggedIn,
+	  open: false
     });
   },
   componentWillMount: function(){
     firebaseUtils.onChange = this.handleLogout;
   },
   processLogout:function(){
-	firebaseUtils.logout();  
+	firebaseUtils.logout();
   },
-  
+
  render:function() {
 	var loginOrOut;
     var register;
+	var handleTouchTap = function() {
+		location.href = '#';
+	};
+	var toggleDrawer = function() {
+		this.setState({
+			open: !this.state.open
+		});
+	}.bind(this);
+	var handleClose = function() {
+		this.setState({
+			open: false
+		});
+	}.bind(this);
     if(this.state.loggedIn){
-      loginOrOut = <li><Link to="/"className="active" onClick={this.processLogout}>Logout</Link></li>;
+      loginOrOut =  <Link to="/"className="active" onClick={this.processLogout}>
+	  					<RaisedButton
+							label='Logout'
+							style={styles.loginButton} />
+					</Link>;
       register = null
     } else {
-      loginOrOut = <li><Link to="/login" className="active">Login</Link></li>;
-      register = <li><Link to="/register" className="active"> Register </Link></li>;
+      loginOrOut =  <Link to="/login" className="active">
+	  					<RaisedButton
+							label='Login'
+							style={styles.loginButton} />
+					</Link>;
+      register = <Link to="/register" style={styles.menuItemLink} onTouchTap={handleClose}>Register</Link>;
     }
 	return(
-    <div className="navbar navbar-default navbar-static-top">
+		<div>
+			<AppBar
+				style={styles.mainAppBarStyle}
+				title="Home"
+				showMenuIconButton={true}
+				iconElementRight={loginOrOut}
+				onTitleTouchTap={handleTouchTap}
+				onLeftIconButtonTouchTap={toggleDrawer} />
+			<Drawer
+				docked={false}
+				width={200}
+				open={this.state.open}
+				onRequestChange={(open) => this.setState({open: open})} >
+				<MenuItem><Link to="/dashboard" style={styles.menuItemLink} onTouchTap={handleClose}>Dashboard</Link></MenuItem>
+				<MenuItem>{register}</MenuItem>
+				<MenuItem><Link to='/Contact' style={styles.menuItemLink}  onTouchTap={handleClose}>Contact Us</Link></MenuItem>
+			</Drawer>
+		</div>
+    /*<div className="navbar navbar-default navbar-static-top">
       <div className="container">
         <div className="navbar-header">
           <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
@@ -57,7 +101,7 @@ var NavBar=React.createClass( {
           </ul>
         </div>
       </div>
-    </div>
+    </div>*/
   )
 }});
 

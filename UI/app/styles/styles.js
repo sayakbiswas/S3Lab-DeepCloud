@@ -37,7 +37,7 @@ var styles = {
 		paddingLeft: 25
 	},
 	toolbar: {
-		backgroundColor: '#8BC34A'
+		backgroundColor: '#03A9F4'
 	},
 	toolbarGroup: {
 		marginLeft: 0
@@ -58,6 +58,20 @@ var styles = {
 	uploadButtonText: {
 		fontSize: '0.95em',
 		paddingLeft: 10
+	},
+	mainAppBarStyle: {
+		backgroundColor: '#8BC34A'
+	},
+	loginButton: {
+		backgroundColor: '#DCEDC8'
+	},
+	menuItemLink: {
+		textDecoration: 'none'
+	},
+	dashboardButton: {
+		minWidth: '35%',
+		width: '60%',
+		margin: 22.8
 	}
 };
 
