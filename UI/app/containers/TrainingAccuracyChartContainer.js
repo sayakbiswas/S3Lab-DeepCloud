@@ -54,8 +54,6 @@ var TrainingAccuracyChartContainer = React.createClass({
 				if(this.state.epochValues.length < nextProps.epochValues.length) {
 					var newPointsCount = nextProps.epochValues.length - this.state.epochValues.length;
 					for(var i = 0; i < newPointsCount; i++) {
-						/*var point = [nextProps.epochValues[this.state.epochValues.length + i],
-										nextProps.dataValues[this.state.epochValues.length + i]];*/
 						var point = {
 							x: nextProps.epochValues[this.state.epochValues.length + i],
 							y: nextProps.dataValues[this.state.epochValues.length + i],
@@ -64,12 +62,12 @@ var TrainingAccuracyChartContainer = React.createClass({
 							}
 						};
 						var series = this.chart.series[0];
-						var shift = series.data.length > 20;
-						this.chart.series[0].addPoint(point, false, shift);
+						var shift = series.data.length > 50;
+						//this.chart.series[0].addPoint(point, true, shift);
 					}
-					this.chart.redraw();
-					/*this.chart.xAxis[0].setCategories(nextProps.epochValues);			//Also works!
-					this.chart.series[0].setData(nextProps.dataValues);*/
+					//this.chart.redraw();
+					this.chart.xAxis[0].setCategories(nextProps.epochValues);			//Also works!
+					this.chart.series[0].setData(nextProps.dataValues);
 					this.setState({
 						epochValues: nextProps.epochValues,
 						dataValues: nextProps.dataValues
