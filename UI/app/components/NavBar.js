@@ -75,6 +75,11 @@ var NavBar=React.createClass( {
 				open={this.state.open}
 				onRequestChange={(open) => this.setState({open: open})} >
 				<MenuItem><Link to="/dashboard" style={styles.menuItemLink} onTouchTap={handleClose}>Dashboard</Link></MenuItem>
+				<MenuItem>
+					<a href="http://deepc05.acis.ufl.edu:9999/" style={styles.menuItemLink} onTouchTap={handleClose} target="_blank">
+						Jupyter Notebook
+					</a>
+				</MenuItem>
 				<MenuItem>{register}</MenuItem>
 				<MenuItem><Link to='/Contact' style={styles.menuItemLink}  onTouchTap={handleClose}>Contact Us</Link></MenuItem>
 			</Drawer>
