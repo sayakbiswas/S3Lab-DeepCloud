@@ -4,8 +4,11 @@ var PropTypes = React.PropTypes;
 var TrainingAccuracyChartContainer = require('../containers/TrainingAccuracyChartContainer');
 var DownloadButtonContainer = require('../containers/DownloadButtonContainer');
 var generalUtils = require('../utils/GeneralUtils.js');
+var SuspendResumeButtonContainer = require('../containers/SuspendResumeButtonContainer');
+var KillJobButtonContainer = require('../containers/KillJobButtonContainer');
 
 function JobDetails(props) {
+	console.log('jobdetails props', props);
 	return(
 		<div style={styles.transparentBg} className="col-sm-12 text-center">
 			<h1>Job Details</h1>
@@ -18,25 +21,35 @@ function JobDetails(props) {
 				<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>{generalUtils.capitalizeFirstLetter(props.jobStatus)}</div>
 				{(function() {
 					if(props.jobType == 'training') {
-						return(
-							<div>
-								<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Training Accuracy: </div>
-								<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>{props.finalAccuracy}</div>
-								<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Model: </div>
-								<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>
-									<DownloadButtonContainer
-										modelDownloadLink={props.model}
-										shouldDisplayButton={true} />
+						if(isNaN(props.procID)) {
+							return(
+								<div>
+									<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Training Accuracy: </div>
+									<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>{props.finalAccuracy}</div>
+									<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Model: </div>
+									<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>
+										<DownloadButtonContainer
+											modelDownloadLink={props.model}
+											shouldDisplayButton={true} />
+									</div>
+									<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Chart: </div>
+									<div className="col-sm-6 text-left" id="chart-container" style={styles.jobDetailRowStyle}>
+										<TrainingAccuracyChartContainer
+											shouldRenderChart={true}
+											container='accuracy-epoch-chart'
+											options={props.options} />
+									</div>
 								</div>
-								<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Chart: </div>
-								<div className="col-sm-6 text-left" id="chart-container" style={styles.jobDetailRowStyle}>
-									<TrainingAccuracyChartContainer
-										shouldRenderChart={true}
-										container='accuracy-epoch-chart'
-										options={props.options} />
+							);
+						} else {
+							return(
+								<div>
+									<SuspendResumeButtonContainer
+										action={'suspend'} />
+									<KillJobButtonContainer />
 								</div>
-							</div>
-						);
+							);
+						}
 					} else {
 						return(
 							<div>

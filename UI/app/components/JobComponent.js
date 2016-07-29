@@ -8,10 +8,17 @@ import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow,
 
 function JobComponent(props) {
 	const {job, ...otherProps} = props;
+	var jobDetailsLink = {
+		pathname: "/jobDetails",
+		query: {
+			jobId: props.job.job_id,
+			procId: props.job.pid
+		}
+	};
 	return(
 		<TableRow {...otherProps}>
 			<TableRowColumn>
-				<Link to={"/jobDetails/" + props.job.job_id}>
+				<Link to={jobDetailsLink}>
 					{props.job.job_id}
 				</Link>
 			</TableRowColumn>

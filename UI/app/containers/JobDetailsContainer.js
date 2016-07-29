@@ -7,8 +7,10 @@ var JobDetailsContainer = React.createClass({
 		router: React.PropTypes.object.isRequired
 	},
 	getInitialState: function() {
+		//console.log('query', this.props.location.query);
 		return {
-			jobID: this.props.routeParams.jobId,
+			jobID: this.props.location.query.jobId,
+			procID: this.props.location.query.procId,
 			jobType: '',
 			jobStatus: '',
 			finalAccuracy: '',
@@ -21,7 +23,7 @@ var JobDetailsContainer = React.createClass({
 		var jobsList = JSON.parse(localStorage.getItem('jobsList'));
 		var accuracyList = [];
 		for(var i = 0; i < jobsList.length; i++) {
-			if(this.props.routeParams.jobId == jobsList[i].job_id) {
+			if(this.props.location.query.jobId == jobsList[i].job_id) {
 				console.log(jobsList[i].accuracy);
 				this.setState({
 					jobType: jobsList[i].jobtype,
@@ -80,6 +82,7 @@ var JobDetailsContainer = React.createClass({
 		return(
 			<JobDetails
 				jobID={this.state.jobID}
+				procID={this.state.procID}
 				jobType={this.state.jobType}
 				jobStatus={this.state.jobStatus}
 				finalAccuracy={this.state.finalAccuracy}

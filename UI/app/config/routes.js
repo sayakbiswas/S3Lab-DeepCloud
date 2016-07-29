@@ -30,7 +30,7 @@ var routes = (
       <Route path="register" component={Register} />
       <Route path='results' header='Results' component={ResultsContainer}/>
 	  <Route path="dashboard" component={Dashboard} />
-	  <Route path='jobDetails/:jobId' component={JobDetailsContainer} />
+	  <Route path='jobDetails' component={JobDetailsContainer} />
 	  <Route path='newImageClassification' component={NewImageClassificationContainer} />
     </Route>
   </Router>
