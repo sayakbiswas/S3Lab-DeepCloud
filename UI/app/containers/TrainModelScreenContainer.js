@@ -21,7 +21,8 @@ var TrainModelScreenContainer = React.createClass({
 	  container: 'accuracy-epoch-chart',
 	  options: {},
 	  epochValues: [],
-	  dataValues: []
+	  dataValues: [],
+	  ajaxPollTimer: {}
     };
   },
   handleUpdateImageWidth: function(e) {
@@ -90,7 +91,7 @@ var TrainModelScreenContainer = React.createClass({
 	formData.append('nClass', this.state.classNum);
 	formData.append('alpha', this.state.learningRate);
 	formData.append('upload', this.state.file);
-	xhr.open('post', 'http://deepc05.acis.ufl.edu:8888/uploadCompleteScript', true);
+	xhr.open('post', 'http://deepc05.acis.ufl.edu:8889/uploadCompleteScript', true);
 	xhr.addEventListener('error', onError, false);
 	xhr.addEventListener('progress', onProgress, false);
 	xhr.send(formData);
@@ -117,6 +118,9 @@ var TrainModelScreenContainer = React.createClass({
 			clearInterval(pollTimer);
 		}
 	}, 100);
+	this.setState({
+		ajaxPollTimer: pollTimer
+	});
   },
   handleServiceResponse: function(responseObject) {
 	var accuracyList = JSON.parse(responseObject.Accuracy);
@@ -192,6 +196,9 @@ var TrainModelScreenContainer = React.createClass({
 		container: 'accuracy-epoch-chart',
 		options: {}
 	});
+  },
+  componentWillUnmount: function() {
+	clearInterval(this.state.ajaxPollTimer);
   },
   render: function() {
 	  return(

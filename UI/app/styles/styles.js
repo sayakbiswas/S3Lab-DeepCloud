@@ -72,6 +72,10 @@ var styles = {
 		minWidth: '35%',
 		width: '60%',
 		margin: 22.8
+	},
+	suspendResumeButton: {
+		width: '25%',
+		margin: 22.8
 	}
 };
 

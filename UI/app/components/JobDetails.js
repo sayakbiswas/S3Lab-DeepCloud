@@ -20,33 +20,46 @@ function JobDetails(props) {
 				<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Status: </div>
 				<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>{generalUtils.capitalizeFirstLetter(props.jobStatus)}</div>
 				{(function() {
+					console.log('in jobDetails', props.jobType);
 					if(props.jobType == 'training') {
 						if(isNaN(props.procID)) {
-							return(
-								<div>
-									<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Training Accuracy: </div>
-									<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>{props.finalAccuracy}</div>
-									<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Model: </div>
-									<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>
-										<DownloadButtonContainer
-											modelDownloadLink={props.model}
-											shouldDisplayButton={true} />
+							if(props.procID == 'processKilled' || props.procID == 'processCrashed') {
+								return null;
+							} else {
+								return(
+									<div>
+										<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Training Accuracy: </div>
+										<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>{props.finalAccuracy}</div>
+										<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Model: </div>
+										<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>
+											<DownloadButtonContainer
+												modelDownloadLink={props.model}
+												shouldDisplayButton={true} />
+										</div>
+										<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Chart: </div>
+										<div className="col-sm-6 text-left" id="chart-container" style={styles.jobDetailRowStyle}>
+											<TrainingAccuracyChartContainer
+												shouldRenderChart={true}
+												container='accuracy-epoch-chart'
+												options={props.options} />
+										</div>
 									</div>
-									<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Chart: </div>
-									<div className="col-sm-6 text-left" id="chart-container" style={styles.jobDetailRowStyle}>
-										<TrainingAccuracyChartContainer
-											shouldRenderChart={true}
-											container='accuracy-epoch-chart'
-											options={props.options} />
-									</div>
-								</div>
-							);
+								);
+							}
 						} else {
 							return(
 								<div>
 									<SuspendResumeButtonContainer
-										action={'suspend'} />
-									<KillJobButtonContainer />
+										action={props.jobStatus == 'live' ? 'suspend' : 'resume'}
+										jobID={props.jobID}
+										procID={props.procID}
+										onSuspendResume={props.handleSuspendResume}
+										isDisabled={props.isSuspendResumeButtonDisabled} />
+									<KillJobButtonContainer
+										jobID={props.jobID}
+										procID={props.procID}
+										isDisabled={props.isKillButtonDisabled}
+										onKillJob={props.handleKillJob} />
 								</div>
 							);
 						}
@@ -71,7 +84,8 @@ JobDetails.propTypes = {
 	finalAccuracy: PropTypes.string,
 	prediction: PropTypes.string,
 	model: PropTypes.string,
-	options: PropTypes.object
+	options: PropTypes.object,
+	handleSuspendResume: PropTypes.func
 };
 
 module.exports = JobDetails;

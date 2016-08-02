@@ -7,7 +7,7 @@ var JobDetailsContainer = React.createClass({
 		router: React.PropTypes.object.isRequired
 	},
 	getInitialState: function() {
-		//console.log('query', this.props.location.query);
+		console.log('query in getInitialState', this.props.location.query);
 		return {
 			jobID: this.props.location.query.jobId,
 			procID: this.props.location.query.procId,
@@ -16,7 +16,9 @@ var JobDetailsContainer = React.createClass({
 			finalAccuracy: '',
 			prediction: '',
 			model: '',
-			options: {}
+			options: {},
+			isKillButtonDisabled: false,
+			isSuspendResumeButtonDisabled: false
 		};
 	},
 	componentDidMount: function() {
@@ -24,7 +26,7 @@ var JobDetailsContainer = React.createClass({
 		var accuracyList = [];
 		for(var i = 0; i < jobsList.length; i++) {
 			if(this.props.location.query.jobId == jobsList[i].job_id) {
-				console.log(jobsList[i].accuracy);
+				console.log('setting state in componentDidMount', jobsList[i].accuracy);
 				this.setState({
 					jobType: jobsList[i].jobtype,
 					jobStatus: jobsList[i].jobstatus,
@@ -35,46 +37,60 @@ var JobDetailsContainer = React.createClass({
 				break;
 			}
 		}
-		var epochValues = [];
-		var dataValues = [];
-		for(var i = 0; i < accuracyList.length; i++) {
-			epochValues[i] = parseInt(accuracyList[i].Epoch);
-			dataValues[i] = parseFloat(accuracyList[i].Accuracy) * 100;
-		}
-		var optionValues = {
-			title: {
-				text: 'Accuracy vs. Epoch'
-			},
-			xAxis: {
+		if(accuracyList != null) {
+			var epochValues = [];
+			var dataValues = [];
+			for(var i = 0; i < accuracyList.length; i++) {
+				epochValues[i] = parseInt(accuracyList[i].Epoch);
+				dataValues[i] = parseFloat(accuracyList[i].Accuracy) * 100;
+			}
+			var optionValues = {
 				title: {
-					text: 'Epoch'
+					text: 'Accuracy vs. Epoch'
 				},
-				categories: epochValues
-			},
-			yAxis: {
-				title: {
-					text: 'Accuracy (%)'
+				xAxis: {
+					title: {
+						text: 'Epoch'
+					},
+					categories: epochValues
 				},
-				plotLines: [{
-					value: 0,
-					width: 1,
-					color: '#808080'
+				yAxis: {
+					title: {
+						text: 'Accuracy (%)'
+					},
+					plotLines: [{
+						value: 0,
+						width: 1,
+						color: '#808080'
+					}]
+				},
+				legend: {
+					layout: 'vertical',
+					align: 'right',
+					verticalAlign: 'middle',
+					borderWidth: 0
+				},
+				series: [{
+					name: 'Accuracy',
+					data: dataValues
 				}]
-			},
-			legend: {
-				layout: 'vertical',
-				align: 'right',
-				verticalAlign: 'middle',
-				borderWidth: 0
-			},
-			series: [{
-				name: 'Accuracy',
-				data: dataValues
-			}]
-		};
+			};
+			this.setState({
+				options: optionValues,
+				finalAccuracy: (accuracyList[accuracyList.length - 1].Accuracy * 100).toFixed(2) + '%'
+			});
+		}
+	},
+	handleSuspendResume: function(param) {
+		console.log('handleSuspendResume', param);
 		this.setState({
-			options: optionValues,
-			finalAccuracy: (accuracyList[accuracyList.length - 1].Accuracy * 100).toFixed(2) + '%'
+			jobStatus: param
+		});
+	},
+	handleKillJob: function() {
+		this.setState({
+			isKillButtonDisabled: true,
+			isSuspendResumeButtonDisabled: true
 		});
 	},
 	render: function() {
@@ -88,7 +104,11 @@ var JobDetailsContainer = React.createClass({
 				finalAccuracy={this.state.finalAccuracy}
 				prediction={this.state.prediction}
 				model={this.state.model}
-				options={this.state.options} />
+				options={this.state.options}
+				handleSuspendResume={this.handleSuspendResume}
+				handleKillJob={this.handleKillJob}
+				isKillButtonDisabled={this.state.isKillButtonDisabled}
+				isSuspendResumeButtonDisabled={this.state.isSuspendResumeButtonDisabled} />
 		);
 	}
 });

@@ -4,10 +4,10 @@ var PropTypes = React.PropTypes;
 import RaisedButton from 'material-ui/RaisedButton';
 var generalUtils = require('../utils/GeneralUtils.js');
 
-function SuspendResumeButton(props) {
+function KillJobButton(props) {
 	return(
 		<RaisedButton
-			label={generalUtils.capitalizeFirstLetter(props.action)}
+			label={generalUtils.capitalizeFirstLetter('Kill Job')}
 			backgroundColor="#8BC34A"
 			labelColor="white"
 			style={styles.suspendResumeButton}
@@ -16,10 +16,9 @@ function SuspendResumeButton(props) {
 	);
 }
 
-SuspendResumeButton.propTypes = {
-	action: PropTypes.string.isRequired,
+KillJobButton.propTypes = {
 	onClickButton: PropTypes.func.isRequired,
 	isDisabled: PropTypes.bool.isRequired
 };
 
-module.exports = SuspendResumeButton;
+module.exports = KillJobButton;

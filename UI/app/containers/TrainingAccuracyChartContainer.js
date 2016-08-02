@@ -4,13 +4,6 @@ var TrainingAccuracyChart = require('../components/TrainingAccuracyChart');
 var Highcharts = require('highcharts');
 
 var TrainingAccuracyChartContainer = React.createClass({
-	propTypes: {
-		shouldRenderChart: PropTypes.bool.isRequired,
-		container: PropTypes.string.isRequired,
-		options: PropTypes.object.isRequired,
-		epochValues: PropTypes.array.isRequired,
-		dataValues: PropTypes.array.isRequired
-	},
 	getInitialState: function() {
 		return {
 			shouldRenderChart: this.props.shouldRenderChart,
