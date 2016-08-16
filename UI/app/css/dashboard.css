@@ -1,0 +1,72 @@
+.sidebarMenu {
+	height: 100% !important;
+}
+
+.gettingstarted.text {
+	font-size: 1.1em;
+	color: black;
+}
+
+.gettingstartedcard {
+	padding: 2em !important;
+}
+
+.gettingstartedcard > .content > .header {
+	margin-bottom: 2em !important;
+	font-size: 1.5em !important;
+}
+
+.gettingstartedcard > .content > .description {
+	padding-bottom: 1.5em;
+}
+
+.ui.fluid.card {
+	background: linear-gradient(#e6e6e6, white) !important;
+}
+
+.actionscard {
+	padding: 1.25em !important;
+}
+
+.actionscard > .content > .header {
+	margin-bottom: 1em !important;
+}
+
+.actionscard > .content > .description > .list > .item {
+	padding-top: 0.5em;
+	padding-bottom: 1em !important;
+}
+
+.notebookscard {
+	padding: 1.25em !important;
+}
+
+.notebookscard > .content > .header {
+	margin-bottom: 1em !important;
+}
+
+.notebookscard > .content > .description > .list > .item {
+	padding-top: 0.5em;
+	padding-bottom: 1em !important;
+}
+
+.newscard {
+	padding: 1.25em !important;
+}
+
+.newscard > .content > .header {
+	margin-bottom: 1em !important;
+}
+
+.newscard > .content > .description > .list > .item {
+	padding-top: 0.5em;
+	padding-bottom: 1em !important;
+}
+
+#download-button {
+	padding-left: 2em;
+}
+
+#result-charts {
+	margin-top: 2em;
+}

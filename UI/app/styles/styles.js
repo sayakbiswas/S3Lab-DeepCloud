@@ -76,6 +76,19 @@ var styles = {
 	suspendResumeButton: {
 		width: '25%',
 		margin: 22.8
+	},
+	loginModalStyle: {
+		minWidth: 500
+	},
+	pusherStyle: {
+		display: 'flex',
+		flexWrap: 'wrap'
+	},
+	sidebarStyle: {
+		sidebar: {
+			background: 'transparent',
+			width: '9%'
+		}
 	}
 };
 

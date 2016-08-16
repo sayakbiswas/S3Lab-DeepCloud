@@ -6,47 +6,60 @@ var Link = ReactRouter.Link;
 
 function UploadPreTrainedModelScreen(props) {
 	return(
-		<div className="jumbotron col-sm-6 col-sm-offset-3 text-center" style={styles.transparentBg}>
-			<h2>Upload Pre Trained Model</h2>
-			<div className="col-sm-12">
-				<form onSubmit={props.onSubmitData} encType="multipart/form-data">
-					<div className="form-group input-group">
-					  <label className="input-group-btn">
-						<span className="btn btn-primary">
-							Choose File
-							<input
-								type="file"
-								name="upload"
-								multiple="multiple"
-								style={styles.invisible}
-								onChange={props.onUpdateFile} />
-						</span>
-					  </label>
-					<input
-						type="text"
-						className="form-control"
-						readOnly
-						value={props.fileName} />
-					</div>
-					<div className="form-group col-sm-4 col-sm-offset-4">
-		                <button
-		                    className="btn btn-block btn-success"
-		                    type="submit">
-		                    Upload
-		                </button>
-		            </div>
-				</form>
-				<div className="col-sm-12 results-section">
-					<div className="col-sm-12">
-						{props.result}
-					</div>
-					<div className="col-sm-12">
-						<Link to="/predict">
-							<button
-								className="btn btn-lg btn-success">
-								Go to Predict
-							</button>
-						</Link>
+		<div className="ui one column grid">
+			<div className="row">
+				<div className="column">
+					<div className="ui fluid raised card">
+						<div className="content">
+							<div className="header center aligned">Upload Pre Trained Model</div>
+							<div className="description">
+								<form className="ui form" onSubmit={props.onSubmitData} encType="multipart/form-data">
+									<div className="field">
+										<div className="ui left action input">
+											<label htmlFor="file" className="ui icon button">
+												<i className="attach icon"></i>
+												Choose File
+											</label>
+											<input
+												type="file"
+												id="file"
+												name="upload"
+												multiple="multiple"
+												style={styles.invisible}
+												onChange={props.onUpdateFile} />
+											<input
+												type="text"
+												readOnly
+												value={props.fileName} />
+										</div>
+									</div>
+									<button className="ui primary button" type="submit">Upload</button>
+									<Link to="/dashboard/predict">
+										<button
+											className="large ui button right floated">
+											Go to Predict
+										</button>
+									</Link>
+								</form>
+								{(function() {
+									if(props.result != '') {
+										if(props.result.includes("not")) {
+											return(
+												<div className="ui error message">
+													{props.result}
+												</div>
+											);
+										} else {
+											return(
+												<div className="ui success message">
+													{props.result}
+												</div>
+											);
+										}
+									}
+								}) ()}
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

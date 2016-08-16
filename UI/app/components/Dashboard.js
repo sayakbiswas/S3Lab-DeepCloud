@@ -2,101 +2,67 @@ var React = require('react');
 var styles = require('../styles/styles');
 var ReactRouter = require('react-router');
 var Link = ReactRouter.Link;
-var JobsListComponentContainer = require('../containers/JobsListComponentContainer');
-import {GridList, GridTile} from 'material-ui/GridList';
-import Paper from 'material-ui/Paper';
-import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
-import RaisedButton from 'material-ui/RaisedButton';
+var DashboardContent = require('./DashboardContent.js');
+var ReactSidebar = require('react-sidebar').default;
+var TopMenu = require('./TopMenu');
 
 var Dashboard = React.createClass({
-  render: function(){
-    return(
-		<div style={styles.gridContainer}>
-			<GridList
-				cols={2}
-				cellHeight={400}
-				style={styles.gridList}>
-				<GridTile style={styles.gridTile}>
-					<Paper zDepth={2} style={styles.gridPaper}>
-						<Toolbar style={styles.toolbar}>
-							<ToolbarGroup firstChild={true} style={styles.toolbarGroup}>
-								<ToolbarTitle text="MNIST Image Prediction" style={styles.toolbarTitle}/>
-							</ToolbarGroup>
-						</Toolbar>
-						<div style={styles.paperMainContents}>
-							<Link to="/trainModel">
-								<RaisedButton
-									label="Train Model"
-									backgroundColor="#8BC34A"
-									style={styles.dashboardButton} />
-							</Link>
-							<br />
-							<Link to="/uploadPreTrainedModel">
-								<RaisedButton
-									label="Upload Pre-Trained Model"
-									backgroundColor="#8BC34A"
-									style={styles.dashboardButton} />
-							</Link>
-							<br />
-							<Link to="/predict">
-								<RaisedButton
-									label="Predict"
-									backgroundColor="#8BC34A"
-									style={styles.dashboardButton} />
-							</Link>
-							<br />
-							<Link to="/newImageClassification">
-								<RaisedButton
-									label="New Image Classification Dataset"
-									backgroundColor="#8BC34A"
-									style={styles.dashboardButton} />
-							</Link>
+	getInitialState: function() {
+		return {
+			sidebarOpen: true,
+			sidebarDocked: true
+		};
+	},
+	onSetSidebarOpen: function(open) {
+		this.setState({sidebarOpen: open});
+	},
+	componentWillMount: function() {
+		var mql = window.matchMedia(`(min-width: 800px)`);
+		mql.addListener(this.mediaQueryChanged);
+		this.setState({mql: mql, sidebarDocked: mql.matches});
+	},
+	componentWillUnmount: function() {
+		this.state.mql.removeListener(this.mediaQueryChanged);
+	},
+	mediaQueryChanged: function() {
+		this.setState({sidebarDocked: this.state.mql.matches});
+	},
+	render: function() {
+		console.log('render dashboard');
+		var SideBarContent = <div className="ui labeled icon borderless pointing vertical inverted menu sidebarMenu">
+								<Link className="active item" to="/dashboard">
+									<i className="dashboard icon"></i>
+									Dashboard
+								</Link>
+								<a href="http://deepc05.acis.ufl.edu:9999/" className="item" target="_blank">
+									<i className="book icon"></i>
+									Notebook
+								</a>
+								<Link to='/Contact' className="item">
+									<i className="call icon"></i>
+									Contact Us
+								</Link>
+								<Link to="/dashboard/jobsList" className="item">
+									<i className="tasks icon"></i>
+									Jobs
+								</Link>
+							</div>;
+		return(
+			<ReactSidebar sidebar={SideBarContent}
+				open={this.state.sidebarOpen}
+				docked={this.state.sidebarDocked}
+				onSetOpen={this.onSetSidebarOpen}
+				styles={styles.sidebarStyle}
+				shadow={false} >
+					<div className="pusher" style={styles.pusherStyle}>
+						<div className="ui container">
+							<TopMenu />
+							{this.props.children}
 						</div>
-					</Paper>
-				</GridTile>
-				<GridTile style={styles.gridTile}>
-					<Paper zDepth={2} style={styles.gridPaper}>
-						<Toolbar style={styles.toolbar}>
-							<ToolbarGroup firstChild={true} style={styles.toolbarGroup}>
-								<ToolbarTitle text="Your Jobs!" style={styles.toolbarTitle} />
-							</ToolbarGroup>
-						</Toolbar>
-						<div style={styles.paperMainContents}>
-							<JobsListComponentContainer />
-						</div>
-					</Paper>
-				</GridTile>
-			</GridList>
-		</div>
-      /*<div style={styles.transparentBg} className="col-sm-12 text-center">
-        <h1>Deep Cloud</h1>
-        <p className="lead">MNIST Image Prediction</p>
-		<div className="btn-group btn-group-md">
-			<div className="col-sm-3">
-				<Link to="/trainModel">
-		            <button className="btn btn-md btn-success">Train Model</button>
-		        </Link>
-			</div>
-	        <div className="col-sm-3">
-				<Link to="/predict">
-					<button className="btn btn-md btn-success">Predict</button>
-				</Link>
-			</div>
-			<div className="col-sm-3">
-				<Link to="/uploadPreTrainedModel">
-					<button className="btn btn-md btn-success">Pre-Trained Model</button>
-				</Link>
-			</div>
-			<div className="col-sm-3">
-				<Link to="/newImageClassification">
-					<button className="btn btn-md btn-success">New Image Classification Dataset</button>
-				</Link>
-			</div>
-		</div>
-		<JobsListComponentContainer />
-      </div>*/
-  	);
-  }
+					</div>
+			</ReactSidebar>
+		);
+	}
 });
 
 module.exports = Dashboard;

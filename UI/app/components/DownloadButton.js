@@ -5,7 +5,7 @@ var PropTypes = React.PropTypes;
 function DownloadButton(props) {
 	return(
 		<button
-			className="btn btn-block btn-success" onClick={props.onClickDownload}>
+			className="ui positive button" onClick={props.onClickDownload}>
 			Download Model
 		</button>
 	);

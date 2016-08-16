@@ -9,7 +9,7 @@ import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow,
 function JobComponent(props) {
 	const {job, ...otherProps} = props;
 	var jobDetailsLink = {
-		pathname: "/jobDetails",
+		pathname: "/dashboard/jobDetails",
 		query: {
 			jobId: props.job.job_id,
 			procId: props.job.pid

@@ -8,7 +8,6 @@ var Main = React.createClass({
     return(
 		<MuiThemeProvider>
 			<div>
-			  <NavBar />
 			  <div className='main-container'>
 				{this.props.children}
 			  </div>

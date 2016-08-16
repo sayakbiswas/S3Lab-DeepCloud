@@ -6,93 +6,99 @@ var TrainingAccuracyChartContainer = require('../containers/TrainingAccuracyChar
 
 function TrainModelScreen(props) {
   return(
-    <div className="jumbotron col-sm-6 col-sm-offset-3 text-center" style={styles.transparentBg}>
-      <h2>Upload Data for Training</h2>
-      <div className="col-sm-12">
-        <form onSubmit={props.onSubmitData} encType="multipart/form-data">
-          <div className="form-group">
-            Image Width:
-            <input
-              type="number"
-              className="form-control"
-              placeholder="0"
-              value={props.imageWidth}
-              onChange={props.onUpdateImageWidth} />
-          </div>
-          <div className="form-group">
-            Image Height:
-            <input
-              type="number"
-              className="form-control"
-              placeholder="0"
-              value={props.imageHeight}
-              onChange={props.onUpdateImageHeight} />
-          </div>
-          <div className="form-group">
-            Number of Classes:
-            <input
-              type="number"
-              className="form-control"
-              placeholder="0"
-              value={props.classNum}
-              onChange={props.onUpdateClassNum} />
-          </div>
-          <div className="form-group">
-            Learning Rate:
-            <input
-              type="number"
-              className="form-control"
-              placeholder="0"
-			  step="any"
-              value={props.learningRate}
-              onChange={props.onUpdateLearningRate} />
-          </div>
-          <div className="form-group input-group">
-            <label className="input-group-btn">
-				<span className="btn btn-primary">
-					Choose Files
-				  	<input
-						type="file"
-						name="upload"
-						multiple="multiple"
-						style={styles.invisible}
-						onChange={props.onUpdateFile} />
-				</span>
-            </label>
-			<input
-				type="text"
-				className="form-control"
-				readOnly
-				value={props.fileName} />
-          </div>
-          <div className="form-group col-sm-4 col-sm-offset-4">
-              <button
-                  className="btn btn-block btn-success"
-                  type="submit">
-                  Train
-              </button>
-          </div>
-        </form>
-		<div className="col-sm-12 results-section">
-			<div>
-				{props.result}
+	<div className="ui two column grid">
+		<div className="row">
+			<div className="column">
+				<div className="ui fluid raised card">
+					<div className="content">
+						<div className="header center aligned">Upload Data for Training</div>
+						<div className="description">
+							<form className="ui form" onSubmit={props.onSubmitData} encType="multipart/form-data">
+								<div className="field">
+									<label>Image Width:</label>
+									<input
+										type="number"
+										placeholder="0"
+										value={props.imageWidth}
+										onChange={props.onUpdateImageWidth} />
+								</div>
+								<div className="field">
+									<label>Image Height:</label>
+									<input
+										type="number"
+										placeholder="0"
+										value={props.imageHeight}
+										onChange={props.onUpdateImageHeight} />
+								</div>
+								<div className="field">
+									<label>Number of Classes:</label>
+									<input
+										type="number"
+										placeholder="0"
+										value={props.classNum}
+										onChange={props.onUpdateClassNum} />
+								</div>
+								<div className="field">
+									<label>Learning Rate:</label>
+									<input
+										type="number"
+										placeholder="0"
+										step="any"
+										value={props.learningRate}
+										onChange={props.onUpdateLearningRate} />
+								</div>
+								<div className="field">
+									<div className="ui left action input">
+										<label htmlFor="file" className="ui icon button">
+											<i className="attach icon"></i>
+											Choose File
+										</label>
+										<input
+											type="file"
+											id="file"
+											name="upload"
+											multiple="multiple"
+											style={styles.invisible}
+											onChange={props.onUpdateFile} />
+										<input
+											type="text"
+											readOnly
+											value={props.fileName} />
+									</div>
+								</div>
+								<button className="ui primary button" type="submit">Train</button>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div id="download-button">
-				<DownloadButtonContainer
-					modelDownloadLink={props.modelDownloadLink}
-					shouldDisplayButton={props.shouldDisplayButton} />
-			</div>
-			<div id="result-charts">
-				<TrainingAccuracyChartContainer
-					shouldRenderChart={props.shouldRenderChart}
-					container={props.container}
-					options={props.options}
-					epochValues={props.epochValues}
-					dataValues={props.dataValues} />
+			<div className="column results-section">
+				<div className="ui fluid raised card">
+					<div className="content">
+						<div className="header center aligned">Training Results</div>
+						<div className="description">
+							<div>
+								{props.result}
+								<span id="download-button">
+									<DownloadButtonContainer
+										modelDownloadLink={props.modelDownloadLink}
+										shouldDisplayButton={props.shouldDisplayButton} />
+								</span>
+							</div>
+							<div id="result-charts">
+								<TrainingAccuracyChartContainer
+									shouldRenderChart={props.shouldRenderChart}
+									container={props.container}
+									options={props.options}
+									epochValues={props.epochValues}
+									dataValues={props.dataValues} />
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-      </div>
-    </div>
+	</div>
   );
 }
 

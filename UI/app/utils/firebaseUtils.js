@@ -100,7 +100,7 @@ var firebaseUtils = {
       } else {
         authData.email = userObj.email;
         cachedUser = authData;
-        this.onChange(true);
+        //this.onChange(true);
         if (cbOnRegister) {
           cb(authData);
           cbOnRegister(false);
@@ -116,7 +116,7 @@ var firebaseUtils = {
   logout: function(){
     ref.unauth();
     cachedUser = null;
-    this.onChange(false);
+    //this.onChange(false);
   }
 };
 
