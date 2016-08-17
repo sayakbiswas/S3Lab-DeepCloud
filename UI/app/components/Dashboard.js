@@ -21,6 +21,12 @@ var Dashboard = React.createClass({
 		mql.addListener(this.mediaQueryChanged);
 		this.setState({mql: mql, sidebarDocked: mql.matches});
 	},
+	componentDidMount: function() {
+		$('.menuItem').on('click', function() {
+			$('.menuItem').removeClass('active');
+			$(this).addClass('active');
+		});
+	},
 	componentWillUnmount: function() {
 		this.state.mql.removeListener(this.mediaQueryChanged);
 	},
@@ -30,19 +36,19 @@ var Dashboard = React.createClass({
 	render: function() {
 		console.log('render dashboard');
 		var SideBarContent = <div className="ui labeled icon borderless pointing vertical inverted menu sidebarMenu">
-								<Link className="active item" to="/dashboard">
+								<Link className="item active menuItem" to="/dashboard" id="dashboardLink">
 									<i className="dashboard icon"></i>
 									Dashboard
 								</Link>
-								<a href="http://deepc05.acis.ufl.edu:9999/" className="item" target="_blank">
+								<a href="http://deepc05.acis.ufl.edu:9999/" className="item menuItem" target="_blank" 	id="notebookLink">
 									<i className="book icon"></i>
 									Notebook
 								</a>
-								<Link to='/Contact' className="item">
+								<Link to='/Contact' className="item menuItem" id="contactLink">
 									<i className="call icon"></i>
 									Contact Us
 								</Link>
-								<Link to="/dashboard/jobsList" className="item">
+								<Link to="/dashboard/jobsList" className="item menuItem" id="jobsLink">
 									<i className="tasks icon"></i>
 									Jobs
 								</Link>

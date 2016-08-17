@@ -105,13 +105,13 @@ var DashboardContent = React.createClass({
 											<div className="item">
 												<Link to="/dashboard">
 													<i className="edit icon"></i>
-													Noteboook 2
+													Notebook 2
 												</Link>
 											</div>
 											<div className="item">
 												<Link to="/dashboard">
 													<i className="edit icon"></i>
-													Noteboook 3
+													Notebook 3
 												</Link>
 											</div>
 										</div>

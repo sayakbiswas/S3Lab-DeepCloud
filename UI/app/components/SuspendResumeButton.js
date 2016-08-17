@@ -5,15 +5,23 @@ import RaisedButton from 'material-ui/RaisedButton';
 var generalUtils = require('../utils/GeneralUtils.js');
 
 function SuspendResumeButton(props) {
-	return(
-		<RaisedButton
-			label={generalUtils.capitalizeFirstLetter(props.action)}
-			backgroundColor="#8BC34A"
-			labelColor="white"
-			style={styles.suspendResumeButton}
-			onClick={props.onClickButton}
-			disabled={props.isDisabled} />
-	);
+	if(props.isDisabled) {
+		return(
+			<button
+				className="ui primary disabled button"
+				onClick={props.onClickButton}>
+				{generalUtils.capitalizeFirstLetter(props.action)}
+			</button>
+		);
+	} else {
+		return(
+			<button
+				className="ui primary button"
+				onClick={props.onClickButton}>
+				{generalUtils.capitalizeFirstLetter(props.action)}
+			</button>
+		);
+	}
 }
 
 SuspendResumeButton.propTypes = {

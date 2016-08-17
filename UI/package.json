@@ -16,6 +16,7 @@
     "babel-preset-react": "^6.5.0",
     "express": "latest",
     "firebase": "^2.3.2",
+    "fixed-data-table": "^0.6.3",
     "highcharts": "^4.2.5",
     "html-webpack-plugin": "^2.19.0",
     "material-ui": "^0.15.2",

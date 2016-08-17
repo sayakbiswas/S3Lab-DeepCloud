@@ -10,68 +10,114 @@ var KillJobButtonContainer = require('../containers/KillJobButtonContainer');
 function JobDetails(props) {
 	console.log('jobdetails props', props);
 	return(
-		<div style={styles.transparentBg} className="col-sm-12 text-center">
-			<h1>Job Details</h1>
-			<div style={styles.containerStyle}>
-				<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>ID: </div>
-				<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>{props.jobID}</div>
-				<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Type: </div>
-				<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>{generalUtils.capitalizeFirstLetter(props.jobType)}</div>
-				<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Status: </div>
-				<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>{generalUtils.capitalizeFirstLetter(props.jobStatus)}</div>
-				{(function() {
-					console.log('in jobDetails', props.jobType);
-					if(props.jobType == 'training') {
-						if(isNaN(props.procID)) {
-							if(props.procID == 'processKilled' || props.procID == 'processCrashed') {
-								return null;
-							} else {
-								return(
-									<div>
-										<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Training Accuracy: </div>
-										<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>{props.finalAccuracy}</div>
-										<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Model: </div>
-										<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>
-											<DownloadButtonContainer
-												modelDownloadLink={props.model}
-												shouldDisplayButton={true} />
+		<div className="ui one column grid">
+			<div className="row">
+				<div className="column">
+					<div className="ui fluid raised card">
+						<div className="content">
+							<div className="header center aligned">Job Details</div>
+							<div className="description">
+								<div className="ui two column grid">
+									<div className="row">
+										<div className="column right aligned">
+											<div className="ui list">
+												<div className="item">ID:</div>
+												<div className="item">Type:</div>
+												<div className="item">Status:</div>
+											</div>
 										</div>
-										<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Chart: </div>
-										<div className="col-sm-6 text-left" id="chart-container" style={styles.jobDetailRowStyle}>
-											<TrainingAccuracyChartContainer
-												shouldRenderChart={true}
-												container='accuracy-epoch-chart'
-												options={props.options} />
+										<div className="column">
+											<div className="ui list">
+												<div className="item">{props.jobID}</div>
+												<div className="item">{generalUtils.capitalizeFirstLetter(props.jobType)}</div>
+												<div className="item">{generalUtils.capitalizeFirstLetter(props.jobStatus)}</div>
+											</div>
 										</div>
 									</div>
-								);
-							}
-						} else {
-							return(
-								<div>
-									<SuspendResumeButtonContainer
-										action={props.jobStatus == 'live' ? 'suspend' : 'resume'}
-										jobID={props.jobID}
-										procID={props.procID}
-										onSuspendResume={props.handleSuspendResume}
-										isDisabled={props.isSuspendResumeButtonDisabled} />
-									<KillJobButtonContainer
-										jobID={props.jobID}
-										procID={props.procID}
-										isDisabled={props.isKillButtonDisabled}
-										onKillJob={props.handleKillJob} />
 								</div>
-							);
-						}
-					} else {
-						return(
-							<div>
-								<div className="col-sm-3 col-sm-offset-2 text-right" style={styles.jobDetailRowStyle}>Prediction: </div>
-								<div className="col-sm-4 text-left" style={styles.jobDetailRowStyle}>{props.prediction}</div>
+								{(function() {
+									console.log('in jobDetails', props.jobType);
+									if(props.jobType == 'training') {
+										if(isNaN(props.procID)) {
+											if(props.procID == 'processKilled' || props.procID == 'processCrashed') {
+												return null;
+											} else {
+												return(
+													<div className="ui two column grid">
+														<div className="row">
+															<div className="column right aligned">
+																<div className="ui list">
+																	<div className="item">Training Accuracy:</div>
+																	<div className="item">Model:</div>
+																	<div className="item">Chart:</div>
+																</div>
+															</div>
+															<div className="column">
+																<div className="ui list">
+																	<div className="item">{props.finalAccuracy}</div>
+																	<div className="item">
+																		<DownloadButtonContainer
+																			modelDownloadLink={props.model}
+																			shouldDisplayButton={true} />
+																	</div>
+																	<div className="item" id="chart-container">
+																		<TrainingAccuracyChartContainer
+																			shouldRenderChart={true}
+																			container='accuracy-epoch-chart'
+																			options={props.options} />
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												);
+											}
+										} else {
+											return(
+												<div className="ui two column grid">
+													<div className="row">
+														<div className="column right aligned">
+															<SuspendResumeButtonContainer
+																action={props.jobStatus == 'live' ? 'suspend' : 'resume'}
+																jobID={props.jobID}
+																procID={props.procID}
+																onSuspendResume={props.handleSuspendResume}
+																isDisabled={props.isSuspendResumeButtonDisabled} />
+														</div>
+														<div className="column">
+															<KillJobButtonContainer
+																jobID={props.jobID}
+																procID={props.procID}
+																isDisabled={props.isKillButtonDisabled}
+																onKillJob={props.handleKillJob} />
+														</div>
+													</div>
+												</div>
+											);
+										}
+									} else {
+										return(
+											<div className="ui two column grid">
+												<div className="row">
+													<div className="column right aligned">
+														<div className="ui list">
+															<div className="item">Prediction:</div>
+														</div>
+													</div>
+													<div className="column">
+														<div className="ui list">
+															<div className="item">{props.prediction}</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										);
+									}
+								}) ()}
 							</div>
-						);
-					}
-				}) ()}
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
