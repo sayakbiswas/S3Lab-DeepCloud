@@ -40,32 +40,34 @@ function JobsListComponent(props) {
 	);
 
 	return(
-		<Table
-			rowHeight={50}
-			headerHeight={50}
-			rowsCount={jobsList.length}
-			width={1000}
-			height={500}
-			>
-			<Column
-				header={<Cell>Job ID</Cell>}
-				cell={<JobIDCell data={jobsList} col="job_id" />}
-				flexGrow={2}
-				width={50}
-			/>
-			<Column
-				header={<Cell>Job Type</Cell>}
-				cell={<JobTypeCell data={jobsList} col="jobtype" />}
-				flexGrow={1}
-				width={100}
-			/>
-			<Column
-				header={<Cell>Job Status</Cell>}
-				cell={<JobStatusCell data={jobsList} col="jobstatus" />}
-				flexGrow={1}
-				width={100}
-			/>
-		</Table>
+		<div className="ui container">
+			<Table
+				rowHeight={50}
+				headerHeight={50}
+				rowsCount={jobsList.length}
+				width={1000}
+				height={500}
+				>
+				<Column
+					header={<Cell>Job ID</Cell>}
+					cell={<JobIDCell data={jobsList} col="job_id" />}
+					flexGrow={2}
+					width={50}
+				/>
+				<Column
+					header={<Cell>Job Type</Cell>}
+					cell={<JobTypeCell data={jobsList} col="jobtype" />}
+					flexGrow={1}
+					width={100}
+				/>
+				<Column
+					header={<Cell>Job Status</Cell>}
+					cell={<JobStatusCell data={jobsList} col="jobstatus" />}
+					flexGrow={1}
+					width={100}
+				/>
+			</Table>
+		</div>
 	);
 }
 

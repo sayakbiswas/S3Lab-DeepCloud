@@ -62,7 +62,7 @@ var Dashboard = React.createClass({
 				shadow={false} >
 					<div className="pusher" style={styles.pusherStyle}>
 						<div className="ui container">
-							<TopMenu />
+							<TopMenu {...this.props} />
 							{this.props.children}
 						</div>
 					</div>

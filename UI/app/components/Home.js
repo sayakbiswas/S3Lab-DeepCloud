@@ -81,7 +81,7 @@ var Home = React.createClass({
                         <hr className="intro-divider" />
                         <ul className="list-inline intro-social-buttons">
                             <li>
-                                <a href="#" onClick={this.handleLoginClick} className="btn btn-default btn-lg"><i className="fa fa-chevron-right fa-fw"></i> <span className="network-name">Get Started</span></a>
+                                <a href="#" onClick={this.handleLoginClick} className="btn btn-default btn-lg"><i className="chevron circle right icon"></i> <span className="network-name">Get Started</span></a>
                             </li>
                         </ul>
                     </div>

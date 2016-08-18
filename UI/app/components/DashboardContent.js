@@ -17,7 +17,7 @@ var DashboardContent = React.createClass({
 	render: function(){
 	  	console.log('dashboard component');
     	return(
-			<div>
+			<div className="ui container">
 				<div className="ui one column grid">
 					<div className="row">
 						<div className="column">
@@ -30,7 +30,7 @@ var DashboardContent = React.createClass({
 												<div className="column center aligned">
 													<div className="item">
 														<Link to="/dashboard">
-															<i className="orange huge sticky note icon"></i>
+															<img className="dashboardimage" src="app/img/ml_icon.png" />
 															<span className="gettingstarted text">How to train a model</span>
 														</Link>
 													</div>
@@ -38,7 +38,7 @@ var DashboardContent = React.createClass({
 												<div className="column center aligned">
 													<div className="item">
 														<Link to="/dashboard">
-															<i className="olive huge sticky note icon"></i>
+															<img className="dashboardimage" src="app/img/notebook.png" />
 															<span className="gettingstarted text">How to use a notebook</span>
 														</Link>
 													</div>
@@ -46,7 +46,7 @@ var DashboardContent = React.createClass({
 												<div className="column center aligned">
 													<div className="item">
 														<Link to="/dashboard">
-															<i className="blue huge sticky note icon"></i>
+															<img className="dashboardimage" src="app/img/jobs.png" />
 															<span className="gettingstarted text">How to monitor your jobs</span>
 														</Link>
 													</div>

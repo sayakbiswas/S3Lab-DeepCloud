@@ -21,19 +21,19 @@ var JobsListComponentContainer = require('../containers/JobsListComponentContain
 
 var routes = (
   <Router history={hashHistory}>
-    <Route path='/' component={Main}>
-      <IndexRoute component={Home} />
-      <Route path='Contact' component={ContactContainer} />
+    <Route path='/' name='Home' component={Main}>
+      <IndexRoute name='Home' component={Home} />
+      <Route path='Contact' name='Contact' component={ContactContainer} />
 	  //<Route path="login" component={Login} />
       //<Route path="register" component={Register} />
       //<Route path='results' header='Results' component={ResultsContainer}/>
-	  <Route path="dashboard" component={Dashboard}>
-	  	<IndexRoute component={DashboardContent} />
-		<Route path='trainModel' component={TrainModelScreenContainer}/>
-		<Route path='predict' component={PredictScreenContainer} />
-		<Route path='uploadPreTrainedModel' component={UploadPreTrainedModelScreenContainer}/>
-		<Route path='jobsList' component={JobsListComponentContainer} />
-		<Route path='jobDetails' component={JobDetailsContainer} />
+	  <Route path="dashboard" name='Dashboard' component={Dashboard}>
+	  	<IndexRoute name='Dashboard' component={DashboardContent} />
+		<Route path='trainModel' name='Train Model' component={TrainModelScreenContainer}/>
+		<Route path='predict' name='Predict' component={PredictScreenContainer} />
+		<Route path='uploadPreTrainedModel' name='Upload Model' component={UploadPreTrainedModelScreenContainer}/>
+		<Route path='jobsList' name='Jobs' component={JobsListComponentContainer} />
+		<Route path='jobDetails' name='Job Details' component={JobDetailsContainer} />
 	  </Route>
     </Route>
   </Router>

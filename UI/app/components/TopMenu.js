@@ -1,6 +1,7 @@
 var React = require('react');
 var styles = require('../styles/styles');
 var PropTypes = React.PropTypes;
+var Breadcrumbs = require('react-breadcrumbs');
 
 function TopMenu(props) {
 	return(
@@ -9,6 +10,13 @@ function TopMenu(props) {
 				<h1 className="ui center aligned header dashboard">
 					<span className="deepcloud text">Deep Cloud</span>
 				</h1>
+			</div>
+			<div className="item">
+				<Breadcrumbs
+					breadcrumbName="TopMenuBreadCrumb"
+					routes={props.routes}
+					params={props.params}
+				/>
 			</div>
 			<div className="right menu">
 				<a className="item">
