@@ -61,25 +61,30 @@ var Login = React.createClass({
 				this.state.isShowingModal &&
 				<ModalContainer onClose={this.handleClose}>
 					<ModalDialog onClose={this.handleClose}>
-						<div className="col-sm-12" style={styles.loginModalStyle}>
-							<h1> Login </h1>
-							<form onSubmit={this.handleSubmit}>
-								<div className="form-group">
-							  		<label> Email </label>
-							  		<input className="form-control" ref="email" placeholder="Email"/>
-								</div>
-								<div className="form-group">
-							  		<label>Password</label>
-							  		<input ref="pw" type="password" className="form-control" placeholder="Password" />
-								</div>
-								{errors}
-								<div className="col-sm-6">
-									<button type="submit" className="btn btn-success">Login</button>
-								</div>
-								<div className="col-sm-6 text-right">
-									<button type="button" className="btn btn-info" onClick={this.handleRegisterClick}>Register</button>
-								</div>
-						  	</form>
+						<div className="ui basic segment" style={styles.loginModalStyle}>
+							<div className="ui header center aligned">Login</div>
+							<div className="description">
+								<form className="ui form" onSubmit={this.handleSubmit}>
+									<div className="field">
+										<label>Email</label>
+										<input
+											type="email"
+											ref="email"
+											placeholder="Email" />
+									</div>
+									<div className="field">
+										<label>Password</label>
+										<input
+											ref="pw"
+											type="password"
+											placeholder="Password" />
+									</div>
+									<button className="ui primary button" type="submit">Login</button>
+									<button className="ui secondary button right floated" onClick={this.handleRegisterClick}>
+										Register
+									</button>
+								</form>
+							</div>
 						</div>
 					</ModalDialog>
 				</ModalContainer>

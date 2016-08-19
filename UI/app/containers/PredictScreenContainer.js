@@ -11,7 +11,9 @@ var PredictScreenContainer = React.createClass({
 			file: '',
 			fileName: '',
 			result: '',
-			imagePreviewUrl: ''
+			imagePreviewUrl: '',
+			loadModelsList: false,
+			pretrainedModel: ''
 		};
 	},
 	handleUpdateFile: function(e) {
@@ -57,7 +59,12 @@ var PredictScreenContainer = React.createClass({
 		};
 		var formData = new FormData();
 		formData.append('upload', this.state.file);
-		xhr.open('post', 'http://deepc05.acis.ufl.edu:8889/MNISTPredictor', true);
+		if(this.state.loadModelsList) {
+			formData.append('job_id', this.state.pretrainedModel);
+			xhr.open('post', 'http://deepc05.acis.ufl.edu:8889/testTrainedOnline', true);
+		} else {
+			xhr.open('post', 'http://deepc05.acis.ufl.edu:8889/MNISTPredictor', true);
+		}
 		xhr.addEventListener('error', onError, false);
 		xhr.addEventListener('progress', onProgress, false);
 		xhr.send(formData);
@@ -73,6 +80,18 @@ var PredictScreenContainer = React.createClass({
 			result: 'The prediction service failed!'
 		});
 	},
+	handleModelSelectionChange: function(checkboxValue) {
+		console.log("checkboxValue ", checkboxValue);
+		this.setState({
+			loadModelsList: checkboxValue == 'on' ? true : false
+		});
+	},
+	handleModelSelection: function(e) {
+		console.log('handleModelSelection', e.target.value);
+		this.setState({
+			pretrainedModel: e.target.value
+		});
+	},
 	render: function() {
 		return(
 			<PredictScreen
@@ -80,7 +99,10 @@ var PredictScreenContainer = React.createClass({
 				onUpdateFile={this.handleUpdateFile}
 				fileName={this.state.fileName}
 				result={this.state.result}
-				imagePreviewUrl={this.state.imagePreviewUrl} />
+				imagePreviewUrl={this.state.imagePreviewUrl}
+				onModelSelectionChange={this.handleModelSelectionChange}
+				loadModelsList={this.state.loadModelsList}
+				onModelSelection={this.handleModelSelection} />
 		);
 	}
 });

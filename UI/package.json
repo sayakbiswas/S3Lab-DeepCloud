@@ -37,6 +37,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.5.0",
+    "copy-webpack-plugin": "^3.0.1",
     "express": "latest",
     "html-webpack-plugin": "^2.19.0",
     "webpack": "^1.13.1",

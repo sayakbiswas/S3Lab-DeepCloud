@@ -80,7 +80,7 @@ var Home = React.createClass({
                         <h3>Cloud based DL Platform</h3>
                         <hr className="intro-divider" />
                         <ul className="list-inline intro-social-buttons">
-                            <li>
+							<li>
                                 <a href="#" onClick={this.handleLoginClick} className="btn btn-default btn-lg"><i className="chevron circle right icon"></i> <span className="network-name">Get Started</span></a>
                             </li>
                         </ul>
