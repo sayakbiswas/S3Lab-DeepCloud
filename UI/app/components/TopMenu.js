@@ -8,7 +8,7 @@ function TopMenu(props) {
 		<div className="ui secondary menu">
 			<div className="item">
 				<h1 className="ui center aligned header dashboard">
-					<span className="deepcloud text">Deep Cloud</span>
+					<span className="deepcloud text">DeepCloud</span>
 				</h1>
 			</div>
 			<div className="item">

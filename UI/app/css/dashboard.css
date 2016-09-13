@@ -84,3 +84,9 @@ body {
 .dashboardimage {
 	height: 9rem;
 }
+
+#myIFrame {
+	height: 40rem;
+	width: 78rem;
+	border: none;
+}

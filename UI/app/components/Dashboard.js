@@ -40,10 +40,10 @@ var Dashboard = React.createClass({
 									<i className="dashboard icon"></i>
 									Dashboard
 								</Link>
-								<a href="http://deepc05.acis.ufl.edu:9999/" className="item menuItem" target="_blank" 	id="notebookLink">
+								<Link to='/dashboard/notebook' className="item menuItem" id="notebookLink">
 									<i className="book icon"></i>
 									Notebook
-								</a>
+								</Link>
 								<Link to='/Contact' className="item menuItem" id="contactLink">
 									<i className="call icon"></i>
 									Contact Us

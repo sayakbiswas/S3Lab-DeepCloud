@@ -20,6 +20,10 @@ body > #header {
 	padding-right: 1.9em;
 }
 
+#myIFrame > html > body > #header > #header-container {
+	display: none !important;
+}
+
 #header-container > .btn.btn-default.btn-sm.navbar-btn.pull-right::after {
 	content: "\f085";
 	font-family: FontAwesome;

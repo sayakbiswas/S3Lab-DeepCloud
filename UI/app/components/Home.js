@@ -76,7 +76,7 @@ var Home = React.createClass({
             <div className="row">
                 <div className="col-lg-12">
                     <div className="intro-message">
-                        <h1>Deep Cloud</h1>
+                        <h1>DeepCloud</h1>
                         <h3>Cloud based DL Platform</h3>
                         <hr className="intro-divider" />
                         <ul className="list-inline intro-social-buttons">
@@ -113,7 +113,7 @@ var Home = React.createClass({
                 <div className="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                     <hr className="section-heading-spacer" />
                     <div className="clearfix"></div>
-                    <h2 className="section-heading">Deep Cloud Notebook</h2>
+                    <h2 className="section-heading">DeepCloud Notebook</h2>
                     <p className="lead">We provide every user with their own instance of cloud hosted python notebooks which they can use to develop code, equations or store notes.</p>
                 </div>
                 <div className="col-lg-5 col-sm-pull-6  col-sm-6">
