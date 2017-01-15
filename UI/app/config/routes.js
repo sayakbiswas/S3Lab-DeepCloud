@@ -19,6 +19,7 @@ var JobDetailsContainer = require('../containers/JobDetailsContainer');
 var DashboardContent = require('../components/DashboardContent.js');
 var JobsListComponentContainer = require('../containers/JobsListComponentContainer');
 var NotebookContainer = require('../containers/NotebookContainer');
+var ModelStoreContainer = require('../containers/ModelStoreContainer');
 
 var routes = (
   <Router history={hashHistory}>
@@ -27,12 +28,13 @@ var routes = (
       <Route path='Contact' name='Contact' component={ContactContainer} />
 	  <Route path="dashboard" name='Dashboard' component={Dashboard}>
 	  	<IndexRoute name='Dashboard' component={DashboardContent} />
-		<Route path='trainModel' name='Train Model' component={TrainModelScreenContainer}/>
-		<Route path='predict' name='Predict' component={PredictScreenContainer} />
-		<Route path='uploadPreTrainedModel' name='Upload Model' component={UploadPreTrainedModelScreenContainer}/>
-		<Route path='jobsList' name='Jobs' component={JobsListComponentContainer} />
-		<Route path='jobDetails' name='Job Details' component={JobDetailsContainer} />
-		<Route path='notebook' name='DeepCloud Notebook' component={NotebookContainer} />
+			<Route path='trainModel' name='Train Model' component={TrainModelScreenContainer}/>
+			<Route path='predict' name='Predict' component={PredictScreenContainer} />
+			<Route path='uploadPreTrainedModel' name='Upload Model' component={UploadPreTrainedModelScreenContainer}/>
+			<Route path='jobsList' name='Jobs' component={JobsListComponentContainer} />
+			<Route path='jobDetails' name='Job Details' component={JobDetailsContainer} />
+			<Route path='notebook' name='DeepCloud Notebook' component={NotebookContainer} />
+			<Route path='modelStore' name='Model Store' component={ModelStoreContainer} />
 	  </Route>
     </Route>
   </Router>

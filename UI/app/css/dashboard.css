@@ -90,3 +90,8 @@ body {
 	width: 78rem;
 	border: none;
 }
+
+.six > .header {
+	margin-bottom: 2em !important;
+	font-size: 1.5em !important;
+}

@@ -52,6 +52,10 @@ var Dashboard = React.createClass({
 									<i className="tasks icon"></i>
 									Jobs
 								</Link>
+								<Link to="/dashboard/modelStore" className="item menuItem" id="modelStoreLink">
+									<i className="shop icon"></i>
+									Model Store
+								</Link>
 							</div>;
 		return(
 			<ReactSidebar sidebar={SideBarContent}
