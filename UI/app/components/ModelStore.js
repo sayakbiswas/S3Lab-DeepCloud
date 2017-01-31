@@ -51,7 +51,7 @@ function ModelStore(props) {
                                 <div className="header center aligned">Models</div>
                                 <div className="description">
                                     <div className="ui three cards">
-                                        <a className="ui card" href="#">
+                                        <Link className="ui card" to="/dashboard/modelDetails">
                                             <div className="content">
                                                 <div className="header">3-Layer CNN</div>
                                                 <div className="meta">
@@ -70,7 +70,7 @@ function ModelStore(props) {
                                                     <img className="ui avatar image" src="app/img/usr_img_1.png" /> Alex
                                                 </div>
                                             </div>
-                                        </a>
+                                        </Link>
 
                                         <a className="ui card" href="#">
                                             <div className="content">

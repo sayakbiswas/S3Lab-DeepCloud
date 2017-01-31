@@ -11,8 +11,8 @@ var ModelStoreContainer = React.createClass({
 		};
 	},
 	componentDidMount: function() {
-        $('select.dropdown').dropdown();
-        $('.ui.rating').rating();
+		$('select.dropdown').dropdown();
+		$('.ui.rating').rating();
 	},
 	componentWillReceiveProps: function() {
 	},

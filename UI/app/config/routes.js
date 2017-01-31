@@ -20,6 +20,7 @@ var DashboardContent = require('../components/DashboardContent.js');
 var JobsListComponentContainer = require('../containers/JobsListComponentContainer');
 var NotebookContainer = require('../containers/NotebookContainer');
 var ModelStoreContainer = require('../containers/ModelStoreContainer');
+var ModelDetailsContainer = require('../containers/ModelDetailsContainer');
 
 var routes = (
   <Router history={hashHistory}>
@@ -35,6 +36,7 @@ var routes = (
 			<Route path='jobDetails' name='Job Details' component={JobDetailsContainer} />
 			<Route path='notebook' name='DeepCloud Notebook' component={NotebookContainer} />
 			<Route path='modelStore' name='Model Store' component={ModelStoreContainer} />
+			<Route path='modelDetails' name='Model Details' component={ModelDetailsContainer} />
 	  </Route>
     </Route>
   </Router>
