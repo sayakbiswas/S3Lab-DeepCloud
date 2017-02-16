@@ -164,3 +164,11 @@ body {
 .ui.reply > .grid > .row {
 	margin-left: 0.2em;
 }
+
+.modal.error > .content {
+	text-align: center;
+}
+
+.modal.error > .actions {
+	text-align: center;
+}

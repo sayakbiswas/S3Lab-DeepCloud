@@ -31,16 +31,16 @@ var ModelStoreContainer = React.createClass({
 			if(xhr.readyState == 4 && xhr.status == 200) {
 				var response = JSON.parse(xhr.responseText);
 				console.log('responseJSON', response);
-				/*this.setState({
-					jobsList: response.rows
+				this.setState({
+					modelsList: response
 				});
-				if(this.state.jobsList.length <= 0) {
+				if(this.state.modelsList.length <= 0) {
 					this.setState({
-						message: 'You have no current or historical jobs.'
+						message: 'Cannot find any models! Contribute one please!!.'
 					});
 				} else {
-					localStorage.setItem('jobsList', JSON.stringify(this.state.jobsList));
-				}*/
+					localStorage.setItem('modelsList', JSON.stringify(this.state.modelsList));
+				}
 			}
 		}.bind(this);
 
@@ -59,16 +59,16 @@ var ModelStoreContainer = React.createClass({
 	componentWillReceiveProps: function() {
 	},
 	render: function() {
-		if(this.state.modelsList.length > 0) {
+		//if(this.state.modelsList.length > 0) {
 			return(
 				<ModelStore
 					modelsList={this.state.modelsList} />
 			);
-		} else {
+		/*} else {
 			return(
 				<div>{this.state.message}</div>
 			);
-		}
+		}*/
 	}
 });
 

@@ -7,7 +7,7 @@ var Link = ReactRouter.Link;
 var DownloadButtonContainer = require('../containers/DownloadButtonContainer');
 
 function ModelDetails(props) {
-    return(
+    return (
         <div className="ui container">
             <div className="ui grid">
                 <div className="row">
@@ -16,8 +16,8 @@ function ModelDetails(props) {
                             <div className="content">
                                 <div className="ui grid">
                                     <div className="row">
-						                <div className="eight wide column left aligned modelname">
-                                            <img src="app/img/model_icon.png" className="modelicon"/>3-Layer CNN
+                                        <div className="eight wide column left aligned modelname">
+                                            <img src="app/img/model_icon.png" className="modelicon" />3-Layer CNN
                                             <div className="modeldescription">
                                                 A CNN for image tagging
                                                 <span className="ui label">
@@ -26,8 +26,8 @@ function ModelDetails(props) {
                                             </div>
                                             <div className="modeldownload">
                                                 <DownloadButtonContainer
-											        modelDownloadLink=""
-											        shouldDisplayButton={true} />
+                                                    modelDownloadLink=""
+                                                    shouldDisplayButton={true} />
                                             </div>
                                         </div>
                                         <div className="eight wide column right aligned modelinfo">
@@ -111,20 +111,26 @@ function ModelDetails(props) {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <form className="ui reply form">
+                                                <form className="ui reply form" onSubmit={props.onAddReview}>
                                                     <div className="field">
-                                                        <textarea></textarea>
+                                                        <textarea
+                                                            value={props.modelReview}
+                                                            onChange={props.onUpdateModelReview} >
+                                                        </textarea>
                                                     </div>
                                                     <div className="ui grid">
                                                         <div className="row">
                                                             <div className="eight wide column left aligned ratings">
                                                                 <b>Rating:</b>
-                                                                <span className="ui star rating" data-rating="3" data-max-rating="5"></span>
+                                                                <span className="ui star rating"
+                                                                    id="set-rating" data-rating="3" data-max-rating="5"></span>
                                                             </div>
                                                             <div className="eight wide column right aligned">
-                                                                <div className="ui blue labeled submit icon button">
-                                                                    <i className="icon edit"></i> Add Reviews
-                                                                </div>
+                                                                <button className="ui blue labeled submit icon button"
+                                                                    id="train-model-button"
+                                                                    type="submit">
+                                                                    <i className="icon edit"></i> Add Review
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -138,11 +144,29 @@ function ModelDetails(props) {
                     </div>
                 </div>
             </div>
+            <div className="ui basic modal error">
+                <div className="ui icon header">
+                    <i className="warning circle icon red"></i>
+                    Error
+                </div>
+                <div className="content">
+                    <p>There was an error while trying to post your review! Please try again.</p>
+                </div>
+                <div className="actions">
+                    <div className="ui blue ok inverted button">
+                        <i className="checkmark icon"></i>
+                        OK
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
 
 ModelDetails.propTypes = {
+    onAddReview: PropTypes.func.isRequired,
+    modelReview: PropTypes.string.isRequired,
+    onUpdateModelReview: PropTypes.func.isRequired
 };
 
 module.exports = ModelDetails;

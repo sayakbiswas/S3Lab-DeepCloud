@@ -67,7 +67,7 @@ function TrainModelScreen(props) {
 												value={props.fileName} />
 										</div>
 									</div>
-									<button className="ui primary button" type="submit">Train</button>
+									<button className="ui primary disabled button" id="train-model-button" type="submit">Train</button>
 								</form>
 							</div>
 						</div>
@@ -100,6 +100,70 @@ function TrainModelScreen(props) {
 				</div>
 			</div>
 		</div>
+		<div className="ui modal long scrolling">
+			<i className="close icon"></i>
+			<div className="header">
+				Enter model details
+			</div>
+			<div className="content">
+				<form className="ui form">
+					<div className="field">
+						<label>Model Name</label>
+						<input 
+							type="text" 
+							name="model-name" 
+							placeholder="Model Name" 
+							value={props.modelName}
+							onChange={props.onUpdateModelName} />
+					</div>
+					<div className="field">
+						<label>One Line Description</label>
+						<input 
+							type="text" 
+							name="one-line-desc" 
+							placeholder="Headline"
+							value={props.oneLineDesc}
+							onChange={props.onUpdateOneLineDesc} />
+					</div>
+					<div className="field">
+						<label>Description</label>
+						<textarea 
+							name="description" 
+							placeholder="Description"
+							value={props.description}
+							onChange={props.onUpdateDescription}>
+						</textarea>
+					</div>
+					<div className="field">
+						<label>Citation Count</label>
+						<input 
+							type="number" 
+							name="citation-count" 
+							placeholder="0"
+							value={props.citationCount}
+							onChange={props.onUpdateCitationCount} />
+					</div>
+					<div className="field">
+						<label>Associated Paper</label>
+						<input 
+							type="text" 
+							name="associated-paper" 
+							placeholder="http://"
+							value={props.associatedPaper}
+							onChange={props.onUpdateAssociatedPaper} />
+					</div>
+				</form>
+			</div>
+			<div className="actions">
+				<div className="ui black deny button">
+					Cancel
+				</div>
+				<div className="ui positive right labeled icon button">
+					Submit
+					<i className="checkmark icon"></i>
+				</div>
+			</div>
+		</div>
 	</div>
   );
 }
@@ -123,7 +187,17 @@ TrainModelScreen.propTypes = {
   container: PropTypes.string.isRequired,
   options: PropTypes.object.isRequired,
   epochValues: PropTypes.array.isRequired,
-  dataValues: PropTypes.array.isRequired
+  dataValues: PropTypes.array.isRequired,
+  modelName: PropTypes.string.isRequired,
+  onUpdateModelName: PropTypes.func.isRequired,
+  oneLineDesc: PropTypes.string.isRequired,
+  onUpdateOneLineDesc: PropTypes.func.isRequired,
+  description: PropTypes.string.isRequired,
+  onUpdateDescription: PropTypes.func.isRequired,
+  citationCount: PropTypes.number.isRequired,
+  onUpdateCitationCount: PropTypes.func.isRequired,
+  associatedPaper: PropTypes.string.isRequired,
+  onUpdateAssociatedPaper: PropTypes.func.isRequired
 };
 
 module.exports = TrainModelScreen;
