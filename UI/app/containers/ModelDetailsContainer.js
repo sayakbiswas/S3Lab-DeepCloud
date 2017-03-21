@@ -49,6 +49,7 @@ var ModelDetailsContainer = React.createClass({
 	componentDidMount: function () {
 		//$('select.dropdown').dropdown();
 		$('.ui.rating').rating();
+		$('.ui.button').button();
 	},
 	componentWillReceiveProps: function () {
 	},

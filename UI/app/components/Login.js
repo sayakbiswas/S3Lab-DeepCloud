@@ -1,5 +1,5 @@
 var React = require('react');
-var firebaseUtils = require('../utils/firebaseUtils');
+//var firebaseUtils = require('../utils/firebaseUtils');
 import {ModalContainer, ModalDialog} from 'react-modal-dialog';
 var styles = require('../styles/styles');
 
@@ -30,24 +30,54 @@ var Login = React.createClass({
 	  });
   },
   handleSubmit: function(e){
+	console.log("submitting");
     e.preventDefault();
     var email = this.refs.email.value;
     var pw = this.refs.pw.value;
-    firebaseUtils.loginWithPW({email: email, password: pw}, function(err){
-      if ( ! err ) {
-        // var location = this.props.location;
-		// console.log(location);
-        // if (location.state && location.state.nextPathname) {
-        //   this.context.router.replace(location.state.nextPathname)
-        // } else {
-        //   this.context.router.replace('/')
-        // }
-		this.context.router.replace('/dashboard');
-      } else {
-        console.log("Login failed! ", err);
-        this.setState({error: err});
-      }
-    }.bind(this));
+    // firebaseUtils.loginWithPW({email: email, password: pw}, function(err){
+    //   if ( ! err ) {
+    //     // var location = this.props.location;
+	// 	// console.log(location);
+    //     // if (location.state && location.state.nextPathname) {
+    //     //   this.context.router.replace(location.state.nextPathname)
+    //     // } else {
+    //     //   this.context.router.replace('/')
+    //     // }
+	// 	this.context.router.replace('/dashboard');
+    //   } else {
+    //     console.log("Login failed! ", err);
+    //     this.setState({error: err});
+    //   }
+    // }.bind(this));
+    var xhr = new window.XMLHttpRequest();
+
+	var urlEncodedDataPairs = [];
+	urlEncodedDataPairs.push(encodeURIComponent('username')+'='+encodeURIComponent(email));
+	urlEncodedDataPairs.push(encodeURIComponent('password')+'='+encodeURIComponent(pw));
+	var formData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
+
+	var onError = function (e) {
+		this.setState({error: 'Login failed!'});
+	}.bind(this);
+
+	var onReady = function (e) {
+		if(xhr.readyState === 4 && xhr.status === 200) {
+			// var location = this.props.location;
+			// console.log('inside onready ', location);
+			// if(location.state && location.state.nextPathname) {
+			// 	this.context.router.replace(location.state.nextPathname);
+			// } else {
+			// 	this.context.router.replace('/');
+			// }
+			this.context.router.replace('/dashboard');
+		}
+	}.bind(this);
+
+	xhr.open('post', 'http://deepc05.acis.ufl.edu:8889/login', true);
+	xhr.addEventListener('error', onError, false);
+	xhr.addEventListener('readystatechange', onReady, false);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send(formData);
   },
   handleRegisterClick: function() {
 	this.handleClose();
@@ -80,7 +110,7 @@ var Login = React.createClass({
 											placeholder="Password" />
 									</div>
 									<button className="ui primary button" type="submit">Login</button>
-									<button className="ui secondary button right floated" onClick={this.handleRegisterClick}>
+									<button className="ui secondary button right floated" type="button" onClick={this.handleRegisterClick}>
 										Register
 									</button>
 								</form>

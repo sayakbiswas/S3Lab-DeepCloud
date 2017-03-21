@@ -66,6 +66,7 @@ var TrainModelScreenContainer = React.createClass({
 	},
 	handleSubmitData: function (e) {
 		var self = this;
+		$('.ui.modal').modal('destroy');
 		$('.ui.modal')
 			.modal({
 				closable: false,

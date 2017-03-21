@@ -27,7 +27,7 @@ function TopMenu(props) {
 					Help
 					<i className="help circle icon"></i>
 				</a>
-				<a className="ui item">
+				<a className="ui item" onClick={props.onClickLogout}>
 					Logout
 					<i className="sign out icon"></i>
 				</a>

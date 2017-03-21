@@ -1,5 +1,5 @@
 var React = require('react');
-var firebaseUtils = require('../utils/firebaseUtils');
+//var firebaseUtils = require('../utils/firebaseUtils');
 import {ModalContainer, ModalDialog} from 'react-modal-dialog';
 var styles = require('../styles/styles');
 
@@ -33,13 +33,37 @@ var Register = React.createClass({
     e.preventDefault();
     var email = this.refs.email.value;
     var pw = this.refs.pw.value;
-    firebaseUtils.createUser({email: email, password: pw}, function(err){
-      if(! err ){
-          this.context.router.replace('/');
-      } else {
-        this.setState({error: err});
-      }
-    }.bind(this));
+    // firebaseUtils.createUser({email: email, password: pw}, function(err){
+    //   if(! err ){
+    //       this.context.router.replace('/');
+    //   } else {
+    //     this.setState({error: err});
+    //   }
+    // }.bind(this));
+	var xhr = new window.XMLHttpRequest();
+
+	var urlEncodedDataPairs = [];
+	urlEncodedDataPairs.push(encodeURIComponent('username')+'='+encodeURIComponent(email));
+	urlEncodedDataPairs.push(encodeURIComponent('password')+'='+encodeURIComponent(pw));
+	var formData = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
+
+	var onError = function (e) {
+		this.setState({error: 'Registration failed!'});
+	}.bind(this);
+
+	var onReady = function (e) {
+		console.log('onready ', xhr.readyState, xhr.status);
+		if(xhr.readyState === 4 && xhr.status === 200) {
+			//this.context.router.replace('/');
+			this.setState({error: 'Registration successful! You can now login!'});
+		}
+	}.bind(this);
+
+	xhr.open('post', 'http://deepc05.acis.ufl.edu:8889/register', true);
+	xhr.addEventListener('error', onError, false);
+	xhr.addEventListener('readystatechange', onReady, false);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send(formData);
   },
   render: function(){
     var errors = this.state.error ? <p> {this.state.error} </p> : '';

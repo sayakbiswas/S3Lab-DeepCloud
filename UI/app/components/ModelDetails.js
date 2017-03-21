@@ -28,6 +28,11 @@ function ModelDetails(props) {
                                                 <DownloadButtonContainer
                                                     modelDownloadLink=""
                                                     shouldDisplayButton={true} />
+                                                <span className="useModel">
+                                                    <Link to="/dashboard/modelTest">
+                                                        Use Model
+                                                    </Link>
+                                                </span>
                                             </div>
                                         </div>
                                         <div className="eight wide column right aligned modelinfo">
@@ -44,7 +49,7 @@ function ModelDetails(props) {
                                     <div className="row">
                                         <div className="column modelexplanation">
                                             <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc id leo pulvinar, faucibus nibh et, fermentum ante. Donec ac convallis lorem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut libero elementum, efficitur risus ac, eleifend nisi. Mauris rutrum ultrices magna, id finibus libero commodo ac. Nullam massa ex, ullamcorper a maximus condimentum, laoreet vel tortor. Vestibulum commodo odio nec massa sagittis volutpat. Vestibulum vel consectetur eros, non feugiat neque. className aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In metus quam, laoreet sit amet pretium quis, auctor ac velit. Phasellus pellentesque non ligula vehicula tempor. Nunc varius turpis sit amet enim cursus maximus. Vestibulum justo libero, posuere sed est non, sagittis pretium tellus.
+                                                A convolutional neural network (CNN, or ConvNet) is a type of feed-forward artificial neural network in which the connectivity pattern between its neurons is inspired by the organization of the animal visual cortex. Individual cortical neurons respond to stimuli in a restricted region of space known as the receptive field. The receptive fields of different neurons partially overlap such that they tile the visual field. The response of an individual neuron to stimuli within its receptive field can be approximated mathematically by a convolution operation. Convolutional networks were inspired by biological processes and are variations of multilayer perceptrons designed to use minimal amounts of preprocessing. They have wide applications in image and video recognition, recommender systems and natural language processing.
                                             </p>
                                         </div>
                                     </div>

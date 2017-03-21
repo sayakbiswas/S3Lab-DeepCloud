@@ -7,6 +7,9 @@ var ReactSidebar = require('react-sidebar').default;
 var TopMenu = require('./TopMenu');
 
 var Dashboard = React.createClass({
+	contextTypes: {
+      router: React.PropTypes.object.isRequired
+    },
 	getInitialState: function() {
 		return {
 			sidebarOpen: true,
@@ -32,6 +35,25 @@ var Dashboard = React.createClass({
 	},
 	mediaQueryChanged: function() {
 		this.setState({sidebarDocked: this.state.mql.matches});
+	},
+	handleClickLogout: function () {
+		//console.log('logout clicked');
+		var xhr = new window.XMLHttpRequest();
+
+		var onError = function () {
+			console.log('Logout Failed!');
+		};
+
+		var onReady = function () {
+			if(xhr.readyState === 4 && xhr.status === 200) {
+				this.context.router.replace('/');
+			}
+		}.bind(this);
+
+		xhr.open('get', 'http://deepc05.acis.ufl.edu:8889/logout', true);
+		xhr.addEventListener('error', onError, false);
+		xhr.addEventListener('readystatechange', onReady, false);
+		xhr.send();
 	},
 	render: function() {
 		console.log('render dashboard');
@@ -66,7 +88,9 @@ var Dashboard = React.createClass({
 				shadow={false} >
 					<div className="pusher" style={styles.pusherStyle}>
 						<div className="ui container">
-							<TopMenu {...this.props} />
+							<TopMenu
+								{...this.props}
+								onClickLogout={this.handleClickLogout} />
 							{this.props.children}
 						</div>
 					</div>
