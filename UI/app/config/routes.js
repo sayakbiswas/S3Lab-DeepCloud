@@ -27,18 +27,18 @@ var routes = (
   <Router history={hashHistory}>
     <Route path='/' name='Home' component={Main}>
       <IndexRoute name='Home' component={Home} />
-      <Route path='Contact' name='Contact' component={ContactContainer} />
 	  <Route path="dashboard" name='Dashboard' component={Dashboard}>
 	  	<IndexRoute name='Dashboard' component={DashboardContent} />
-			<Route path='trainModel' name='Train Model' component={TrainModelScreenContainer}/>
-			<Route path='predict' name='Predict' component={PredictScreenContainer} />
-			<Route path='uploadPreTrainedModel' name='Upload Model' component={UploadPreTrainedModelScreenContainer}/>
-			<Route path='jobsList' name='Jobs' component={JobsListComponentContainer} />
-			<Route path='jobDetails' name='Job Details' component={JobDetailsContainer} />
-			<Route path='notebook' name='DeepCloud Notebook' component={NotebookContainer} />
-			<Route path='modelStore' name='Model Store' component={ModelStoreContainer} />
-			<Route path='modelDetails' name='Model Details' component={ModelDetailsContainer} />
-			<Route path='modelTest' name='Model Test' component={ModelTestScreenContainer} />
+		<Route path='trainModel' name='Train Model' component={TrainModelScreenContainer}/>
+		<Route path='predict' name='Predict' component={PredictScreenContainer} />
+		<Route path='uploadPreTrainedModel' name='Upload Model' component={UploadPreTrainedModelScreenContainer}/>
+		<Route path='jobsList' name='Jobs' component={JobsListComponentContainer} />
+		<Route path='jobDetails' name='Job Details' component={JobDetailsContainer} />
+		<Route path='notebook' name='DeepCloud Notebook' component={NotebookContainer} />
+		<Route path='modelStore' name='Model Store' component={ModelStoreContainer} />
+		<Route path='modelDetails' name='Model Details' component={ModelDetailsContainer} />
+		<Route path='modelTest' name='Model Test' component={ModelTestScreenContainer} />
+		<Route path='Contact' name='Contact' component={ContactContainer} />
 	  </Route>
     </Route>
   </Router>

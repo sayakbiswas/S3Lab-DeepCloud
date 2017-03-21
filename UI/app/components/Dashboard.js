@@ -66,7 +66,7 @@ var Dashboard = React.createClass({
 									<i className="book icon"></i>
 									Notebook
 								</Link>
-								<Link to='/Contact' className="item menuItem" id="contactLink">
+								<Link to='/dashboard/Contact' className="item menuItem" id="contactLink">
 									<i className="call icon"></i>
 									Contact Us
 								</Link>

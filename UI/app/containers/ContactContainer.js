@@ -9,7 +9,7 @@ var ContactContainer = React.createClass({
     return {
       fullname: '',
 	  email:'',
-	  message:'Enter your message',
+	  message:'',
 	  tel:''
     }
   },
@@ -26,7 +26,7 @@ var ContactContainer = React.createClass({
 	this.setState({
 		fullname:'',
 		email:'',
-		message:'Enter your message',
+		message:'',
 		tel:''
 	});
   },
@@ -53,41 +53,62 @@ var ContactContainer = React.createClass({
   },
   render: function () {
     return (
-	<div className="section text-left">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-            <h1 className="text-center">Contact Us</h1>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-12">
-            <form role="form" onSubmit={this.onSubmitForm}>
-              <div className="form-group">
-                <label className="control-label" htmlFor="fullName1">Full Name</label>
-                <input className="form-control" id="fullName" placeholder="Enter Full Name"
-                type="text" onChange={this.onUpdateName} value={this.state.fullname}/>
-              </div>
-              <div className="form-group">
-                <label className="control-label" htmlFor="exampleInputEmail1">Email address</label>
-                <input className="form-control" id="exampleInputEmail1"
-                placeholder="Enter email" type="email" value={this.state.email} onChange={this.onUpdateEmail}/>
-              </div>
-              <div className="form-group">
-                <label className="control-label" htmlFor="telephoneNo">Mobile Number</label>
-                <input className="form-control" id="telephoneNo" placeholder="Mobile Number"
-                type="tel" value={this.state.tel} onChange={this.onUpdateTel}/>
-              </div>
-              <div className="form-group">
-                <label className="control-label" htmlFor="message">Message</label>
-				<textarea  className="form-control" id="message" rows="4" cols="50" value={this.state.message} onChange={this.onUpdateMessage} />
-              </div>
-              <button type="submit" className="btn btn-success">Submit</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+		<div className='ui container'>
+			<div className='ui one column grid'>
+				<div className='row'>
+					<div className='column'>
+						<div className='ui fluid raised card'>
+							<div className='content'>
+								<div className='header center aligned'>Contact Us</div>
+								<div className='description'>
+									<form role='form' className='ui form' onSubmit={this.onSubmitForm}>
+										<div className='field'>
+											<label>Full Name</label>
+											<input
+												type='text'
+												placeholder='Enter Full Name'
+												onChange={this.onUpdateName}
+												value={this.state.fullName} />
+										</div>
+										<div className='field'>
+											<label>Email Address</label>
+											<input
+												type='email'
+												placeholder='Enter Email Address'
+												onChange={this.onUpdateEmail}
+												value={this.state.email} />
+										</div>
+										<div className='field'>
+											<label>Mobile Number</label>
+											<input
+												type='tel'
+												placeholder='Mobile Number'
+												onChange={this.onUpdateTel}
+												value={this.state.tel} />
+										</div>
+										<div className='field'>
+											<label>Message</label>
+											<textarea
+												rows='4'
+												cols='40'
+												placeholder='Enter your message here'
+												onChange={this.onUpdateMessage}
+												value={this.state.message}>
+											</textarea>
+										</div>
+										<button
+											type='submit'
+											className='ui primary button'>
+											Submit
+										</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
     )
   }
 });
