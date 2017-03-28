@@ -50,7 +50,7 @@ var Dashboard = React.createClass({
 			}
 		}.bind(this);
 
-		xhr.open('get', 'http://deepc05.acis.ufl.edu:8889/logout', true);
+		xhr.open('get', 'https://deepc05.acis.ufl.edu/logout', true);
 		xhr.addEventListener('error', onError, false);
 		xhr.addEventListener('readystatechange', onReady, false);
 		xhr.send();

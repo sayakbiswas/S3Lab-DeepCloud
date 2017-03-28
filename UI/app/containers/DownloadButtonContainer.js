@@ -30,7 +30,7 @@ var DownloadButtonContainer = React.createClass({
 		});
 	},
 	handleClickDownload: function(e) {
-  	  window.open('http://deepc05.acis.ufl.edu:8889'+this.state.modelDownloadLink, '_blank');
+  	  window.open('https://deepc05.acis.ufl.edu'+this.state.modelDownloadLink, '_blank');
     },
 	render: function() {
 		if(this.state.shouldDisplayButton === true) {

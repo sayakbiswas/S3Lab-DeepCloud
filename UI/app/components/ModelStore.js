@@ -20,10 +20,16 @@ function ModelStore(props) {
                                             <div className="field">
                                                 <select className="ui dropdown">
                                                     <option value="">Category</option>
-                                                    <option value="Vision">Vision</option>
-                                                    <option value="Natural Language">Natural Language</option>
-                                                    <option value="Game Bots">Game Bots</option>
-                                                    <option value="Genomics">Genomics</option>
+													{(function () {
+														var categories = [];
+														var count = 0;
+														for(let category of props.categoriesList) {
+															categories.push(<option
+																				key={count++}
+																				value={category}>{category}</option>);
+														}
+														return categories;
+													}) ()}
                                                 </select>
                                             </div>
                                         </div>
@@ -51,89 +57,35 @@ function ModelStore(props) {
                                 <div className="header center aligned">Models</div>
                                 <div className="description">
                                     <div className="ui three cards">
-                                        <Link className="ui card" to="/dashboard/modelDetails">
-                                            <div className="content">
-                                                <div className="header">3-Layer CNN</div>
-                                                <div className="meta">
-                                                    <span className="category">Vision</span>
-                                                </div>
-                                                <div className="description">
-                                                    <p>Description of 3-Layer CNN</p>
-                                                </div>
-                                            </div>
-                                            <div className="extra content">
-                                                <div className="left floated">
-                                                    Rating:
-                                                    <div className="ui star rating" data-rating="4" data-max-rating="5"></div>
-                                                </div>
-                                                <div className="right floated author">
-                                                    <img className="ui avatar image" src="app/img/usr_img_1.png" /> Alex
-                                                </div>
-                                            </div>
-                                        </Link>
-
-                                        <a className="ui card" href="#">
-                                            <div className="content">
-                                                <div className="header">RNN/LSTM</div>
-                                                <div className="meta">
-                                                    <span className="category">Natural Language</span>
-                                                </div>
-                                                <div className="description">
-                                                    <p>Description of RNN/LSTM</p>
-                                                </div>
-                                            </div>
-                                            <div className="extra content">
-                                                <div className="left floated">
-                                                    Rating:
-                                                    <div className="ui star rating" data-rating="3" data-max-rating="5"></div>
-                                                </div>
-                                                <div className="right floated author">
-                                                    <img className="ui avatar image" src="app/img/usr_img_2.png" /> Matt
-                                                </div>
-                                            </div>
-                                        </a>
-
-                                        <a className="ui card" href="#">
-                                            <div className="content">
-                                                <div className="header">GAN</div>
-                                                <div className="meta">
-                                                    <span className="category">Vision</span>
-                                                </div>
-                                                <div className="description">
-                                                    <p>Description of GAN</p>
-                                                </div>
-                                            </div>
-                                            <div className="extra content">
-                                                <div className="left floated">
-                                                    Rating:
-                                                    <div className="ui star rating" data-rating="5" data-max-rating="5"></div>
-                                                </div>
-                                                <div className="right floated author">
-                                                    <img className="ui avatar image" src="app/img/usr_img_3.png" /> Dave
-                                                </div>
-                                            </div>
-                                        </a>
-
-                                        <a className="ui card" href="#">
-                                            <div className="content">
-                                                <div className="header">Deep-Q</div>
-                                                <div className="meta">
-                                                    <span className="category">Game Bot</span>
-                                                </div>
-                                                <div className="description">
-                                                    <p>Description of Deep-Q</p>
-                                                </div>
-                                            </div>
-                                            <div className="extra content">
-                                                <div className="left floated">
-                                                    Rating:
-                                                    <div className="ui star rating" data-rating="4" data-max-rating="5"></div>
-                                                </div>
-                                                <div className="right floated author">
-                                                    <img className="ui avatar image" src="app/img/usr_img_1.png" /> Alex
-                                                </div>
-                                            </div>
-                                        </a>
+										{(function () {
+											var models = [];
+											var count = 0;
+											for(let model of props.modelsList) {
+												models.push(
+													<Link key={count++} className="ui card" to="/dashboard/modelDetails">
+														<div className="content">
+															<div className="header">{model.modelname}</div>
+															<div className="meta">
+																<span className="category">{model.category}</span>
+															</div>
+															<div className="description">
+																<p>{model.description}</p>
+															</div>
+														</div>
+														<div className="extra content">
+															<div className="left floated">
+																Rating:
+																<div className="ui star rating" data-rating={model.modelrating} data-max-rating="5"></div>
+															</div>
+															<div className="right floated author">
+			                                                    <img className="ui avatar image" src="app/img/usr_img_default.png" /> {model.developer_username}
+			                                                </div>
+														</div>
+													</Link>
+												);
+											}
+											return models;
+										}) ()}
                                     </div>
                                 </div>
                             </div>
@@ -146,6 +98,8 @@ function ModelStore(props) {
 }
 
 ModelStore.propTypes = {
+	modelsList: PropTypes.array.isRequired,
+	categoriesList: PropTypes.array.isRequired
 };
 
 module.exports = ModelStore;

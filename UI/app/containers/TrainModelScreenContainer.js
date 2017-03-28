@@ -110,7 +110,7 @@ var TrainModelScreenContainer = React.createClass({
 					formData.append('description', self.state.description);
 					formData.append('citationCount', self.state.citationCount);
 					formData.append('associatedPaper', self.state.associatedPaper);
-					xhr.open('post', 'http://deepc05.acis.ufl.edu:8889/uploadCompleteScript', true);
+					xhr.open('post', 'https://deepc05.acis.ufl.edu/uploadCompleteScript', true);
 					xhr.addEventListener('error', onError, false);
 					xhr.addEventListener('progress', onProgress, false);
 					xhr.send(formData);

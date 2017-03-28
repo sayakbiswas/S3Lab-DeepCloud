@@ -61,9 +61,9 @@ var PredictScreenContainer = React.createClass({
 		formData.append('upload', this.state.file);
 		if(this.state.loadModelsList) {
 			formData.append('job_id', this.state.pretrainedModel);
-			xhr.open('post', 'http://deepc05.acis.ufl.edu:8889/testTrainedOnline', true);
+			xhr.open('post', 'https://deepc05.acis.ufl.edu/testTrainedOnline', true);
 		} else {
-			xhr.open('post', 'http://deepc05.acis.ufl.edu:8889/generalPredictorImageUpload', true);
+			xhr.open('post', 'https://deepc05.acis.ufl.edu/generalPredictorImageUpload', true);
 		}
 		xhr.addEventListener('error', onError, false);
 		xhr.addEventListener('progress', onProgress, false);

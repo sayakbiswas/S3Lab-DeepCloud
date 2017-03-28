@@ -26,7 +26,7 @@ var KillJobButtonContainer = React.createClass({
 		var formData = new FormData();
 		formData.append('job_id', this.state.jobID);
 		formData.append('pid', this.state.procID);
-		xhr.open('post', 'http://deepc05.acis.ufl.edu:8889/killProcess', true);
+		xhr.open('post', 'https://deepc05.acis.ufl.edu/killProcess', true);
 		xhr.addEventListener('error', onError, false);
 		xhr.send(formData);
 		xhr.addEventListener('readystatechange', onReady, false);

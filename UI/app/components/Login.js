@@ -73,7 +73,7 @@ var Login = React.createClass({
 		}
 	}.bind(this);
 
-	xhr.open('post', 'http://deepc05.acis.ufl.edu:8889/login', true);
+	xhr.open('post', 'https://deepc05.acis.ufl.edu/login', true);
 	xhr.addEventListener('error', onError, false);
 	xhr.addEventListener('readystatechange', onReady, false);
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

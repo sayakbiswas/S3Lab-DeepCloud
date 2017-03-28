@@ -32,9 +32,9 @@ var SuspendResumeButtonContainer = React.createClass({
 		formData.append('job_id', this.state.jobID);
 		formData.append('pid', this.state.procID);
 		if(this.state.action == 'suspend') {
-			xhr.open('post', 'http://deepc05.acis.ufl.edu:8889/suspendProcess', true);
+			xhr.open('post', 'https://deepc05.acis.ufl.edu/suspendProcess', true);
 		} else {
-			xhr.open('post', 'http://deepc05.acis.ufl.edu:8889/resumeProcess', true);
+			xhr.open('post', 'https://deepc05.acis.ufl.edu/resumeProcess', true);
 		}
 		xhr.addEventListener('error', onError, false);
 		xhr.send(formData);
