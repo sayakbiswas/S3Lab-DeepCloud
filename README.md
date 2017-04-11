@@ -10,7 +10,7 @@ The following assumes a basic familiarity with webpack, npm package management, 
 3. Execute `npm install`. This will install the required dependencies for the project.
 4. To run the project in a local server, execute `npm start`. This runs the project in a local webpack-dev server. It should automatically open the url in a browser window. It also supports hot-reloading meaning as soon as you make changes to the code, it is visible in the browser on refresh; no need to restart the server.
 
-## Setup for Deployment:
+## Steps for Deployment:
 1. Once the changes are done, push to the git repository using `git push origin master`.
 2. SSH into the server and clone into a folder as above. If the code is already present in the server do a `git pull` to get the latest changes.
 3. Then execute `npm install`. If it doesn't automatically run the post-install script, also execute `npm run-script postinstall`.
