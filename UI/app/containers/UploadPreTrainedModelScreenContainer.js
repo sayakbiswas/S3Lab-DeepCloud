@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var UploadPreTrainedModelScreen = require('../components/UploadPreTrainedModelScreen');
+var globalVars = require('../config/globalVars');
 
 var UploadPreTrainedModelScreenContainer = React.createClass({
 	contextTypes: {
@@ -49,7 +50,7 @@ var UploadPreTrainedModelScreenContainer = React.createClass({
 		};
 		var formData = new FormData();
 		formData.append('upload', this.state.file);
-		xhr.open('post', 'https://deepc05.acis.ufl.edu/generalPredictorModelUpload', true);
+		xhr.open('post', globalVars.baseUrl+'generalPredictorModelUpload', true);
 		xhr.addEventListener('error', onError, false);
 		xhr.addEventListener('progress', onProgress, false);
 		xhr.send(formData);

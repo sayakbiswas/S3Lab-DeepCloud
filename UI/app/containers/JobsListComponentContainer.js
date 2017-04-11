@@ -1,6 +1,8 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var JobsListComponent = require('../components/JobsListComponent');
+var globalVars = require('../config/globalVars');
+import cookie from "react-cookie";
 
 var JobsListComponentContainer = React.createClass({
 	contextTypes: {
@@ -44,7 +46,8 @@ var JobsListComponentContainer = React.createClass({
 			}
 		}.bind(this);
 
-		xhr.open('get', 'https://deepc05.acis.ufl.edu/getDashboard', true);
+		xhr.open('get', globalVars.baseUrl+'getDashboard', true);
+		xhr.withCredentials = true;
 		xhr.addEventListener('error', onError, false);
 		xhr.addEventListener('progress', onProgress, false);
 		xhr.send();

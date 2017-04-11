@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var ModelTestScreen = require('../components/ModelTestScreen');
+var globalVars = require('../config/globalVars');
 
 var ModelTestScreenContainer = React.createClass({
 	contextTypes: {
@@ -67,7 +68,7 @@ var ModelTestScreenContainer = React.createClass({
 		};
 		var formData = new window.FormData();
 		formData.append('upload', this.state.file);
-		xhr.open('post', 'http://deepc05.acis.ufl.edu:8889/generalPredictorImageUpload', true);
+		xhr.open('post', globalVars.baseUrl+'generalPredictorImageUpload', true);
 		xhr.addEventListener('error', onError, false);
 		xhr.send(formData);
 		xhr.addEventListener('readystatechange', onReady, false);

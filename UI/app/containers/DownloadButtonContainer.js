@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var DownloadButton = require('../components/DownloadButton');
+var globalVars = require('../config/globalVars');
 
 var DownloadButtonContainer = React.createClass({
 	propTypes: {
@@ -30,7 +31,7 @@ var DownloadButtonContainer = React.createClass({
 		});
 	},
 	handleClickDownload: function(e) {
-  	  window.open('https://deepc05.acis.ufl.edu'+this.state.modelDownloadLink, '_blank');
+  	  window.open(globalVars.baseUrl+this.state.modelDownloadLink, '_blank');
     },
 	render: function() {
 		if(this.state.shouldDisplayButton === true) {

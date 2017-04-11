@@ -5,6 +5,7 @@ var Link = ReactRouter.Link;
 var DashboardContent = require('./DashboardContent.js');
 var ReactSidebar = require('react-sidebar').default;
 var TopMenu = require('./TopMenu');
+var globalVars = require('../config/globalVars');
 
 var Dashboard = React.createClass({
 	contextTypes: {
@@ -50,7 +51,7 @@ var Dashboard = React.createClass({
 			}
 		}.bind(this);
 
-		xhr.open('get', 'https://deepc05.acis.ufl.edu/logout', true);
+		xhr.open('get', globalVars.baseUrl+'logout', true);
 		xhr.addEventListener('error', onError, false);
 		xhr.addEventListener('readystatechange', onReady, false);
 		xhr.send();

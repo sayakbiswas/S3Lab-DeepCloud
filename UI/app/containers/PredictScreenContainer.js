@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var PredictScreen = require('../components/PredictScreen');
+var globalVars = require('../config/globalVars');
 
 var PredictScreenContainer = React.createClass({
 	contextTypes: {
@@ -61,9 +62,9 @@ var PredictScreenContainer = React.createClass({
 		formData.append('upload', this.state.file);
 		if(this.state.loadModelsList) {
 			formData.append('job_id', this.state.pretrainedModel);
-			xhr.open('post', 'https://deepc05.acis.ufl.edu/testTrainedOnline', true);
+			xhr.open('post', globalVars.baseUrl+'testTrainedOnline', true);
 		} else {
-			xhr.open('post', 'https://deepc05.acis.ufl.edu/generalPredictorImageUpload', true);
+			xhr.open('post', globalVars.baseUrl+'generalPredictorImageUpload', true);
 		}
 		xhr.addEventListener('error', onError, false);
 		xhr.addEventListener('progress', onProgress, false);

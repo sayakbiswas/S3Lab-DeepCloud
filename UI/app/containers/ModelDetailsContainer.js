@@ -39,7 +39,7 @@ var ModelDetailsContainer = React.createClass({
 			.modal('show');
 	},
 	handleSuccessSubmit: function() {
-		
+
 	},
 	handleUpdateModelReview: function(e) {
 		this.setState({

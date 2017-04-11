@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var SuspendResumeButton = require('../components/SuspendResumeButton');
+var globalVars = require('../config/globalVars');
 
 var SuspendResumeButtonContainer = React.createClass({
 	getInitialState: function() {
@@ -32,9 +33,9 @@ var SuspendResumeButtonContainer = React.createClass({
 		formData.append('job_id', this.state.jobID);
 		formData.append('pid', this.state.procID);
 		if(this.state.action == 'suspend') {
-			xhr.open('post', 'https://deepc05.acis.ufl.edu/suspendProcess', true);
+			xhr.open('post', globalVars.baseUrl+'suspendProcess', true);
 		} else {
-			xhr.open('post', 'https://deepc05.acis.ufl.edu/resumeProcess', true);
+			xhr.open('post', globalVars.baseUrl+'resumeProcess', true);
 		}
 		xhr.addEventListener('error', onError, false);
 		xhr.send(formData);

@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var TrainModelScreen = require('../components/TrainModelScreen');
+var globalVars = require('../config/globalVars');
 
 var TrainModelScreenContainer = React.createClass({
 	contextTypes: {
@@ -110,7 +111,7 @@ var TrainModelScreenContainer = React.createClass({
 					formData.append('description', self.state.description);
 					formData.append('citationCount', self.state.citationCount);
 					formData.append('associatedPaper', self.state.associatedPaper);
-					xhr.open('post', 'https://deepc05.acis.ufl.edu/uploadCompleteScript', true);
+					xhr.open('post', globalVars.baseUrl+'uploadCompleteScript', true);
 					xhr.addEventListener('error', onError, false);
 					xhr.addEventListener('progress', onProgress, false);
 					xhr.send(formData);

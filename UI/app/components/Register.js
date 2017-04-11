@@ -2,6 +2,7 @@ var React = require('react');
 //var firebaseUtils = require('../utils/firebaseUtils');
 import {ModalContainer, ModalDialog} from 'react-modal-dialog';
 var styles = require('../styles/styles');
+var globalVars = require('../config/globalVars');
 
 var Register = React.createClass({
   contextTypes: {
@@ -59,7 +60,7 @@ var Register = React.createClass({
 		}
 	}.bind(this);
 
-	xhr.open('post', 'https://deepc05.acis.ufl.edu/register', true);
+	xhr.open('post', globalVars.baseUrl+'register', true);
 	xhr.addEventListener('error', onError, false);
 	xhr.addEventListener('readystatechange', onReady, false);
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

@@ -90,3 +90,85 @@ body {
 	width: 78rem;
 	border: none;
 }
+
+.six > .header {
+	margin-bottom: 2em !important;
+	font-size: 1.5em !important;
+}
+
+.modeldetailscard > .content > .grid > .row > .modelname {
+	font-size: 1.5em !important;
+	font-weight: 700;
+}
+
+.modeldetailscard > .content > .grid > .row > .modelname > .modelicon {
+	height: 2.5em;
+	width: 3.5em;
+}
+
+.modeldetailscard > .content > .grid > .row > .modelname > .modeldescription {
+	padding-left: 5.5em;
+	font-weight: 500;
+	font-size: 0.65em;
+	margin-bottom: 1em;
+}
+
+.modeldetailscard > .content > .grid > .row > .modelname > .modeldescription > .label {
+	margin-left: 1em;
+	
+	background-color: lightgray;
+}
+
+.modeldetailscard > .content > .grid > .row > .modelname > .modeldownload {
+	padding-left: 5.5em;
+	font-weight: 500;
+	font-size: 0.65em;
+}
+
+.modeldetailscard > .content > .grid > .row > .modelinfo > .devdetails {
+	margin-top: 2em;
+}
+
+.modeldetailscard > .content > .grid > .row > .modelinfo > .devdetails > .image {
+	margin-left: 1em;
+}
+
+.modeldetailscard > .content > .grid > .row > .modelexplanation {
+	padding-left: 6.2em;
+}
+
+.modeldetailscard > .content > .grid > .row > .modelextras > .header {
+	font-size: 1.2em;
+	padding-left: 4.2em;
+	font-weight: 600;
+}
+
+.modeldetailscard > .content > .grid > .row > .modelextras > .cites {
+	margin-top: 1em;
+	padding-left: 5em;
+}
+
+.modeldetailscard > .content > .grid > .row > .modelextras > .paperDownload {
+	padding-left: 5em;
+}
+
+.modeldetailscard > .content > .grid > .row > .modelextras > .paperDownload > button {
+	margin-left: 1em;
+}
+
+.modelcommentscard > .content > .grid > .row > .column > .comments > .comment > .content > .rating {
+	margin-left: 1em;
+	margin-right: 1em;
+}
+
+.ui.reply > .grid > .row {
+	margin-left: 0.2em;
+}
+
+.modal.error > .content {
+	text-align: center;
+}
+
+.modal.error > .actions {
+	text-align: center;
+}
