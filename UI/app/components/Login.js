@@ -31,7 +31,7 @@ var Login = React.createClass({
 		  isShowingModal: nextProps.showModal
 	  });
   },
-  handleSubmit: function(e){
+  handleSubmit: function(e){	
 	console.log("submitting");
     e.preventDefault();
     var email = this.refs.email.value;
